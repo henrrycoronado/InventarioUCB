@@ -1,0 +1,28 @@
+para hacer la instalacion de todo en caso de no tener los proyectos:
+
+dotnet new sln -n InventarioUCB  // crear la solucion
+dotnet new angular -n InventarioUCB_SPA --no-https   // crear el proyecto Angular en el mismo directorio
+dotnet new xunit -n InventarioUCB_Test   // crear el proyecto Test en el mismo directorio
+
+dotnet sln InventarioUCB.sln add .\InventarioUCB_SPA\InventarioUCB_SPA.csproj // agregar a la solucion el proyecto angular
+dotnet sln InventarioUCB.sln add .\InventarioUCB_Test\InventarioUCB_Test.csproj // agregar a la solucion el proyecto test
+
+dotnet add .\InventarioUCB_Test\InventarioUCB_Test.csproj reference .\InventarioUCB_SPA\InventarioUCB_SPA.csproj
+    // al proyecto test se le pasa la referencia del primer proyecto
+
+dotnet build // se compila para obtener las dependecnias correspondientes
+
+// se procede a mover al proyecto angular para instalar los frameworks correspondientes:
+// ojo esta instalacion debe ser dentro del directorio donde esta ubicado el proyecto ANGULAR
+
+dotnet tool install --global dotnet-ef  // se instala la herramienta tools
+dotnet add package Microsoft.EntityFrameworkCore --version 7.0.2  
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 7  
+dotnet add package Microsoft.EntityFrameworkCore.Design -v 7   
+
+// luego de tener todas las herramientas se extrae las tablas de la DB:
+// ojo esto se debe hacer dentro del directorio donde esta ubicado el proyecto ANGULAR
+
+dotnet ef dbcontext scaffold "Server=localhost;Database=InventarioUCB;User=root;Password=admin123;" Pomelo.EntityFrameworkCore.MySql -o .\DataBaseApp\Models
+
+// se cambia los parametros de la coneccion con los de la base de datos y el parametro la ruta de la carpeta contenedor por la de su preferencia
