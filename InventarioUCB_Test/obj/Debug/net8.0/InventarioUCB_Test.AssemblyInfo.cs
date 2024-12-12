@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InventarioUCB_Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+461934b9edb6bf600848d6847f9eac1288c95ec9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dcd02c588653b89d521484d15090c858227af66b")]
 [assembly: System.Reflection.AssemblyProductAttribute("InventarioUCB_Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InventarioUCB_Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
