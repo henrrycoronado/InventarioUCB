@@ -1,0 +1,25 @@
+# Archivos generados por el sistema de compilación
+bin/
+obj/
+
+# Archivos de configuración de Visual Studio y otros entornos
+.vs/
+.idea/
+.vscode/
+
+# Archivos generados por NuGet
+project.assets.json
+project.nuget.cache
+*.nupkg
+*.snupkg
+*.nuget
+
+# Archivos de depuración
+*.pdb
+*.cache
+
+# Archivos de usuario y otros temporales
+*.user
+*.userosscache
+*.suo
+*.userprefs
