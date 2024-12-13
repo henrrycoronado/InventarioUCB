@@ -12,6 +12,7 @@ builder.Services.AddDbContext<InventarioUcbContext>(options =>
         new MySqlServerVersion(new Version(8, 0, 33))
     )
 );
+
 builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<SolicitudPrestamoRepository>();
 builder.Services.AddScoped<ReporteRepository>();
