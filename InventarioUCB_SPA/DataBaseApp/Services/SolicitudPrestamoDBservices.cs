@@ -15,7 +15,7 @@ public class SolicitudPrestamoRepository : BaseRepository<Solicitudesprestamo>
             .Where(s => s.Estado == "Pendiente")
             .ToList();
     }
-    public List<Solicitudesprestamo> SolicitudesUsuario(int idUser)
+    public List<Solicitudesprestamo> GetByIdUser(int idUser)
     {
         return _context.Solicitudesprestamos
             .Where(s => s.IdUsuario == idUser)

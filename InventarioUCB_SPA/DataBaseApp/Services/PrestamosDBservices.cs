@@ -21,9 +21,12 @@ public class PrestamoRepository : BaseRepository<Prestamo>
         .Where(d => d.Estado == "Devueltos" || d.Estado == "Retrasado")
         .ToList();
     }
-    public Prestamo? GetInforPrestamo(int IdSolicitudPrestamo){
+    public List<Prestamo> Historial(int IdUsuario){
         return _context.Prestamos
-                .Where( p => p.IdSolicitudPrestamo == IdSolicitudPrestamo)
-                .FirstOrDefault();
-    } 
+            .Where(p => _context.Solicitudesprestamos
+                .Where(sp => sp.IdUsuario == IdUsuario)
+                .Select(sp => sp.Id)
+                .Contains(p.IdSolicitudPrestamo)
+            ).ToList();
+    }
 }

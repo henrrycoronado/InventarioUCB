@@ -53,5 +53,34 @@ public class ValidacionesService
         };
         return modelo;
     }
-    
+    public PrestamoModel convertirPrestamoModel(Prestamo prestamo){
+        if(prestamo == null){
+            return new PrestamoModel();
+        }
+        var modelo = new PrestamoModel{
+            IdSolicitudPrestamo = prestamo.IdSolicitudPrestamo,
+            FechaDevolucion = prestamo.FechaDevolucion,
+            Estado = prestamo.Estado
+        };
+        return modelo;
+    }    
+    public SolicitudPrestamoModel convertirSolicitudModel(Solicitudesprestamo solicitud){
+        if(solicitud == null){
+            return new SolicitudPrestamoModel();
+        }
+        var modelo = new SolicitudPrestamoModel{
+            IdUsuario = solicitud.IdUsuario,
+            FechaInicioPrestamo = solicitud.FechaInicioPrestamo,
+            FechaFinPrestamo = solicitud.FechaFinPrestamo,
+            FechaSolicitud = solicitud.FechaSolicitud,
+            Estado = solicitud.Estado
+        };
+        return modelo;
+    }    
+
+
+    public bool ValidarSolicitud(SolicitudPrestamoModel soli)
+    {
+        return true;
+    }
 }
