@@ -20,7 +20,7 @@ public class ComponenteRepository : BaseRepository<Componentesaccesorio>
         return _context.Componentesaccesorios
             .FirstOrDefault(e => e.CodigoUcb == codigoUcb);
     }
-    public Componentesaccesorio? GetByCodigoComponente(string codigoComponent)
+    public Componentesaccesorio? GetByCodigoEquipo(string codigoComponent)
     {
         return _context.Componentesaccesorios
             .FirstOrDefault(e => e.CodigoComponente == codigoComponent);
@@ -30,5 +30,16 @@ public class ComponenteRepository : BaseRepository<Componentesaccesorio>
         return _context.Componentesaccesorios
             .FirstOrDefault(e => e.NumeroSerie == numeroSerie);
     }
-    
+    public bool EstadoComponentCorrect(string estadoEquipo)
+    {
+        if(estadoEquipo == "Nuevo" || estadoEquipo == "Bueno" || estadoEquipo == "Bueno - Sellado" || estadoEquipo == "Regular" || estadoEquipo == "Usado"){
+            return true;
+        }return false;
+    }
+    public bool EstadoCorrect(string estadoEquipo)
+    {
+        if(estadoEquipo == "Disponible" || estadoEquipo == "Ocupado" || estadoEquipo == "Mantenimiento" || estadoEquipo == "Eliminado"){
+            return true;
+        }return false;
+    }
 }

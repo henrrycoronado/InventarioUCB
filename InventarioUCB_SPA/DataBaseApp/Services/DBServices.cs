@@ -32,12 +32,20 @@ public class BaseRepository<T> where T : class
     }
 
     // Actualizar un registro existente
-    public void Update(T entity, int id)
+    public void Update(T entity)
     {
-        var existingEntity = GetById(id);
-        if (existingEntity == null){ return ;}
-    
-        _context.Entry(existingEntity).CurrentValues.SetValues(entity); // Solo actualiza propiedades
+        _context.Set<T>().Update(entity);
         _context.SaveChanges();
+    }
+
+    // Eliminar un registro
+    public void Delete(int id)
+    {
+        var entity = _context.Set<T>().Find(id);
+        if (entity != null)
+        {
+            _context.Set<T>().Remove(entity);
+            _context.SaveChanges();
+        }
     }
 }

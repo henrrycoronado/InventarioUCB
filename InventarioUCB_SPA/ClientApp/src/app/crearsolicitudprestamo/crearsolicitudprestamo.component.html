@@ -1,3 +1,42 @@
 <body>
     AQUI SE MUESTRA EL FORMULARIO PARA CREAR UNA SOLICITUD DE PRESTAMO
 </body>
+
+<div class="registro-solicitud">
+    <h2>Registrar Solicitud de Préstamo</h2>
+    <form (ngSubmit)="registrarSolicitud()">
+      <div>
+        <label for="codigoUcb">Código UCB del Equipo:</label>
+        <input id="codigoUcb" [(ngModel)]="solicitudData.CodigoUcb" name="codigoUcb" required />
+      </div>
+  
+      <div>
+        <label for="fechaInicioPrestamo">Fecha de Inicio del Préstamo:</label>
+        <input id="fechaInicioPrestamo" type="date" [(ngModel)]="solicitudData.FechaInicioPrestamo" name="fechaInicioPrestamo" required />
+      </div>
+  
+      <div>
+        <label for="fechaFinPrestamo">Fecha de Fin del Préstamo:</label>
+        <input id="fechaFinPrestamo" type="date" [(ngModel)]="solicitudData.FechaFinPrestamo" name="fechaFinPrestamo" required />
+      </div>
+  
+      <div>
+        <label for="motivoPrestamo">Motivo del Préstamo:</label>
+        <textarea id="motivoPrestamo" [(ngModel)]="solicitudData.MotivoPrestamo" name="motivoPrestamo" required></textarea>
+      </div>
+  
+      <!-- Datos internos (no editables) -->
+      <div *ngIf="false">
+        <label for="fechaSolicitud">Fecha de Solicitud:</label>
+        <input id="fechaSolicitud" type="date" [value]="solicitudData.FechaSolicitud" disabled />
+      </div>
+  
+      <div *ngIf="false">
+        <label for="estado">Estado:</label>
+        <input id="estado" [value]="solicitudData.Estado" disabled />
+      </div>
+  
+      <button type="submit">Registrar Solicitud</button>
+    </form>
+  </div>
+  

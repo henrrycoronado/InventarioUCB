@@ -3,3 +3,33 @@
 
     PUEDE MOSTRARSE UNA LISTA DIFERENTE CON LOS PRODUCTOS QUE NO SE ENCUENTRAN DISPONIBLES
 </body>
+
+
+<div class="lista-equipos">
+    <h2>Lista de Equipos</h2>
+    <div class="contenedor-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Numero de Serie</th>
+            <th>Código UCB</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equipo of equipos">
+            <td>{{ equipo.Nombre }}</td>
+            <td>{{ equipo.Estado }}</td>
+            <td>{{ equipo.NumeroSerie }}</td>
+            <td>{{ equipo.CodigoUcb }}</td>
+            <td style="justify-content: center; display: flex;">
+              <button (click)="redirigir(equipo.CodigoEquipo)">+</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

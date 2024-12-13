@@ -1,7 +1,6 @@
-using System.ComponentModel;
 using InventarioUCB_SPA.DataBaseApp.Models.Services;
 namespace ServicesApp.Models;
-public class ComponenteModelNuevo
+public class ComponenteModel
 {
     public string? CodigoUcb { get; set; }
 
@@ -20,8 +19,7 @@ public class ComponenteModelNuevo
     public string Ubicacion { get; set; } = null!;
 
     public string? EstadoComponente { get; set; }
-}
-public class ComponenteModel: ComponenteModelNuevo{
+
     public string? Estado { get; set; }
 }
 

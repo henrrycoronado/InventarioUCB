@@ -2,49 +2,69 @@
     AQUI SE MUESTRA EL FORMULARIO PARA LA CREACION DE UN COMPONENTE
 </body>
 
-<div class="overlay" *ngIf="isFormOpen" (click)="closeForm()"></div>
-<div class="form-popup" *ngIf="isFormOpen">
-  <h2>REGISTRAR COMPONENTE</h2>
-  <form (submit)="submitForm()">
-
-    <h6 for="name">Codigo Componente:</h6>
-    <input id="name" type="text" [(ngModel)]="formData.name" name="name" required>
-
-    <h6 for="name">Numero de Serie:</h6>
-    <input id="name" type="text" [(ngModel)]="formData.name" name="name" required>
-
-    <h6 for="name">Nombre del Componente:</h6>
-    <input id="name" type="text" [(ngModel)]="formData.name" name="name" required>
-
-    <h6 for="email">Manufacturero:</h6>
-    <label>____</label>
-    <input id="email" type="email" [(ngModel)]="formData.email" name="email" required>
-
-    <h6 for="message">Codigo de Producto</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-
-    <h6 for="message">Estado</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-
-    <h6 for="message">Detale</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-    
-    <h6 for="message">Categoria</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-
-    <h6 for="description">Ubicacion:</h6>
-    <label>Gabinete en el que se encuentran</label>
-    <textarea id="description" [(ngModel)]="formData.description" name="description" required></textarea>
-
-    <h6 for="message">Cantidad</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-
-    <h6 for="message">Link Datasheet</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-
-    <div class="form-buttons">
-      <button type="submit" class="btn-submit">Crear Componente</button>
-      <button type="button" class="btn-cancel" (click)="closeForm()">Cancelar</button>
+<div class="registro-componente">
+  <h2>Registrar Nuevo Componente</h2>
+  <form (ngSubmit)="registrarComponente()">
+    <div>
+      <label for="codigoUcb">Código UCB:</label>
+      <input id="codigoUcb" [(ngModel)]="componenteData.CodigoUcb" name="codigoUcb" />
     </div>
+
+    <div>
+      <label for="codigoComponente">Código del Componente:</label>
+      <input id="codigoComponente" [(ngModel)]="componenteData.CodigoComponente" name="codigoComponente" required />
+    </div>
+
+    <div>
+      <label for="numeroSerie">Número de Serie:</label>
+      <input id="numeroSerie" [(ngModel)]="componenteData.NumeroSerie" name="numeroSerie" />
+    </div>
+
+    <div>
+      <label for="fabricante">Fabricante:</label>
+      <input id="fabricante" [(ngModel)]="componenteData.Fabricante" name="fabricante" />
+    </div>
+
+    <div>
+      <label for="direccionEnlace">Dirección de Enlace:</label>
+      <input id="direccionEnlace" [(ngModel)]="componenteData.DireccionEnlace" name="direccionEnlace" />
+    </div>
+
+    <div>
+      <label for="nombre">Nombre del Componente:</label>
+      <input id="nombre" [(ngModel)]="componenteData.Nombre" name="nombre" required />
+    </div>
+
+    <div>
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" [(ngModel)]="componenteData.Descripcion" name="descripcion"></textarea>
+    </div>
+
+    <div>
+      <label for="categoria">Categoría:</label>
+      <input id="categoria" [(ngModel)]="componenteData.IdCategoria" name="categoria" type="number" required />
+    </div>
+
+    <div>
+      <label for="ubicacion">Ubicación:</label>
+      <input id="ubicacion" [(ngModel)]="componenteData.Ubicacion" name="ubicacion" required />
+    </div>
+
+    <div>
+      <label for="estadoEquipo">Estado del Componente:</label>
+      <input id="estadoEquipo" [(ngModel)]="componenteData.EstadoEquipo" name="estadoEquipo" />
+    </div>
+
+    <div>
+      <label for="estado">Estado:</label>
+      <input id="estado" [(ngModel)]="componenteData.Estado" name="estado" />
+    </div>
+
+    <div>
+      <label for="cantidad">Cantidad:</label>
+      <input id="cantidad" [(ngModel)]="componenteData.Cantidad" name="cantidad" type="number" min="1" required />
+    </div>
+
+    <button type="submit">Registrar Componente</button>
   </form>
 </div>

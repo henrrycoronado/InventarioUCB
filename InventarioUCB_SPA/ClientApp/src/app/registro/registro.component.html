@@ -1,3 +1,49 @@
 <body>
     FORMULARIO PARA REGISTRAR USUARIO
 </body>
+
+<form (ngSubmit)="submitForm()">
+    <div>
+      <label for="ci">CI:</label>
+      <input id="ci" [(ngModel)]="usuarioData.Ci" name="ci" required />
+    </div>
+    <h6></h6>
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" [(ngModel)]="usuarioData.Nombre" name="nombre" required />
+    </div>
+    <h6></h6>
+    <div>
+      <label for="apellido">Apellido:</label>
+      <input id="apellido" [(ngModel)]="usuarioData.Apellido" name="apellido" required />
+    </div>
+    <h6></h6>
+    <div>
+      <label for="correo">Correo:</label>
+      <input id="correo" type="email" [(ngModel)]="usuarioData.Correo" name="correo" required />
+    </div>
+    <h6></h6>
+    <div>
+      <label for="contraseña">Contraseña:</label>
+      <input
+        id="contraseña"
+        type="password"
+        [(ngModel)]="usuarioData.Contrasena"
+        name="contraseña"
+        required
+      />
+    </div>
+    <h6></h6>
+    <div>
+      <label for="telefono">Teléfono:</label>
+      <input id="telefono" [(ngModel)]="usuarioData.Telefono" name="telefono" required />
+    </div>
+    <h6></h6>
+    <div>
+      <label for="rol">Rol:</label>
+      <input id="rol" [(ngModel)]="usuarioData.Rol" name="rol" />
+    </div>
+    <h6></h6>
+    <button type="submit">Registrar Usuario</button>
+  </form>
+  
