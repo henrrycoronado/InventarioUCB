@@ -9,24 +9,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   
-  isFormOpen = false;
-
+  constructor(private http: HttpClient,private router: Router, @Inject('BASE_URL') private baseUrl: string) 
+  { }
+;
   loginData = {
-    email: '',
-    password: '',
-  };
-
-  openForm() {
-    this.isFormOpen = true;
-  }
-
-  closeForm() {
-    this.isFormOpen = false;
-  }
+    Correo: '',
+    Password: '',
+  }; 
 
   submitForm() {
-    alert(`Formulario enviado:\nCorreo: ${this.loginData.email}\nContraseña: ${this.loginData.password}`);
-    this.loginData = { email: '', password: ''}; // Reiniciar datos del formulario
-  }
+    console.log(this.loginData.Correo + " " + this.loginData.Password);
+    this.http.post<number>(this.baseUrl + 'usuario/', this.loginData).subscribe({
+      next: (result) => {
+        console.log('Resultado:', result);
+        alert(`Usuario autenticado.`);
+      },
+      error: (error) => {
+        console.error('Error al enviar la solicitud:', error);
+        alert(`Ocurrió un error: ${error.message}`);
+      },
+    });
   
+    this.loginData = { Correo: '', Password: '' }; // Reinicia el formulario
+  }
 }
