@@ -8,23 +8,16 @@ namespace InventarioUCB_SPA.Controllers;
 [Route("[controller]")]
 public class CategoriaController : ControllerBase
 {
-    private readonly ILoginService _servicel;
-    private readonly IRegisterService _servicer;
-    public CategoriaController(ILoginService servicel, IRegisterService servicer)
+    private readonly ICategoriaServices _service;
+    public CategoriaController(ICategoriaServices services)
     {
-        _servicel = servicel;
-        _servicer = servicer;
+        _service = services;
     }
 
-    [HttpPost("Loggin")]
-    public int? Loggin([FromBody] LoginRequest request)
+    [HttpPost("CrearCategoria")]
+    public string Crear([FromBody] CategoriaModel request)
     {
-        return _servicel.Logear(request.Correo, request.Password);
+        return _service.CrearCategoria(request);
     }
 
-    [HttpPost("CrearCuenta")]
-    public string NuevaCuenta([FromBody] UsuarioNuevo user)
-    {
-        return _servicer.RegistrarUsuario(user.usuario, user.IdAdministrador);
-    }
 }
