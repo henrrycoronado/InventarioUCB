@@ -1,0 +1,19 @@
+<body>
+
+    <h2>Subir Video</h2>
+  <form (submit)="submitForm()">
+    <h6 for="name">Nombre del Video:</h6>
+    <input id="name" type="text" [(ngModel)]="loginData.email" name="name" required>
+
+    <h6 for="email">Etiquetas:</h6>
+    <label>Agrega etiquetas que categorizen mejor tu curso y sea mas facil de encontrar.</label>
+    <input id="email" type="email" [(ngModel)]="loginData.password" name="email" required>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn-submit">Subir Video</button>
+      <button type="button" class="btn-cancel" (click)="closeForm()">Cancelar</button>
+    </div>
+  </form>
+
+    MOSTRAR FORMULARIO PARA INICIAR SESION
+</body>
