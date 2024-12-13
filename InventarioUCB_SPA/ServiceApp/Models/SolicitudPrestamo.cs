@@ -12,3 +12,9 @@ public class SolicitudPrestamoModel
 
     public string? Estado { get; set; }
 }
+
+
+public class Ids{
+    public int IdAdministrador { get; set; }
+    public int IdElement { get; set; }
+}

@@ -21,6 +21,7 @@ builder.Services.AddScoped<PrestamoRepository>();
 builder.Services.AddScoped<EquipoRepository>();
 builder.Services.AddScoped<DetalleSolicitudPrestamoRepository>();
 builder.Services.AddScoped<ComponenteRepository>();
+builder.Services.AddScoped<CategoriaRepository>();
 
 builder.Services.AddScoped<ValidacionesService>();
 builder.Services.AddScoped<ILoginService, LoginServices>();
@@ -31,6 +32,7 @@ builder.Services.AddScoped<IComponentService, ComponenteService>();
 builder.Services.AddScoped<IGestionarSolicitudService, GestionarSolicitudService>();
 builder.Services.AddScoped<IPrestamoService, PrestamoService>();
 builder.Services.AddScoped<ISolicitudPrestamoService, SolicitudPrestamoService>();
+builder.Services.AddScoped<ICategoriaServices, CategoriaServices>();
 
 builder.Services.AddControllersWithViews();
 

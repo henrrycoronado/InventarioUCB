@@ -2,7 +2,7 @@ using InventarioUCB_SPA.DataBaseApp.Models.Services;
 using ServicesApp.Models;
 public interface IGestionarSolicitudService
 {
-    public void AprobarSolicitud(int Idsolicitud);
+    public string AprobarSolicitud(int Idsolicitud, int IdAdmin);
 
-    public void RechazarSolicitud(int Idsolicitud);
+    public string RechazarSolicitud(int Idsolicitud, int IdAdmin);
 }
