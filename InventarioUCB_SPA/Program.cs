@@ -5,18 +5,33 @@ using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
 
 var builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
 
 builder.Services.AddDbContext<InventarioUcbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(8, 0, 33)) // Ajusta según tu versión de MariaDB
+        new MySqlServerVersion(new Version(8, 0, 33))
     )
 );
 
 builder.Services.AddScoped<UsuarioRepository>();
+builder.Services.AddScoped<SolicitudPrestamoRepository>();
+builder.Services.AddScoped<ReporteRepository>();
+builder.Services.AddScoped<RegistroActividadesRepository>();
+builder.Services.AddScoped<PrestamoRepository>();
+builder.Services.AddScoped<EquipoRepository>();
+builder.Services.AddScoped<DetalleSolicitudPrestamoRepository>();
+builder.Services.AddScoped<ComponenteRepository>();
 
+builder.Services.AddScoped<ValidacionesService>();
 builder.Services.AddScoped<ILoginService, LoginServices>();
+builder.Services.AddScoped<IRegisterService, RegisterService>();
+builder.Services.AddScoped<INotificacionService, NotificacionService>();
+builder.Services.AddScoped<IEquipoService, EquipoService>();
+builder.Services.AddScoped<IComponentService, ComponenteService>();
+builder.Services.AddScoped<IGestionarSolicitudService, GestionarSolicitudService>();
+builder.Services.AddScoped<IPrestamoService, PrestamoService>();
+builder.Services.AddScoped<ISolicitudPrestamoService, SolicitudPrestamoService>();
+
 builder.Services.AddControllersWithViews();
 
 

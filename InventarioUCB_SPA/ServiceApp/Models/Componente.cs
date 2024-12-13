@@ -24,3 +24,21 @@ public class ComponenteModelNuevo
 public class ComponenteModel: ComponenteModelNuevo{
     public string? Estado { get; set; }
 }
+
+
+public class ComponenteEntrada{
+    public ComponenteModelNuevo componente { get; set; } = null!;
+    public int IdAdministrador { get; set; }
+}
+
+public class ComponenteUpdate{
+    public ComponenteModel componente { get; set; } = null!;
+    public int IdAdministrador { get; set; }
+}
+
+public class ComponenteDelete {
+    public string CodigoComponente { get; set; } = null!;
+    public int IdAdministrador { get; set; }
+}
+
+

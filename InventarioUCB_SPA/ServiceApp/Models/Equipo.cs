@@ -26,3 +26,29 @@ public class EquipoModelNuevo
 public class EquipoModel: EquipoModelNuevo{
     public string? Estado { get; set; } = null!;
 }
+
+public class EquipoEntrada{
+    public EquipoModelNuevo equipo { get; set; } = null!;
+    public int IdAdministrador { get; set; }
+}
+public class EquipoEntradaUpdate{
+    public EquipoModel equipo { get; set; } = null!;
+    public int IdAdministrador { get; set; }
+}
+
+public class EquipoEntradaDelete{
+    public string Codigoequipo { get; set; } = null!;
+    public int IdAdministrador { get; set; }
+}
+
+public class cambiarEstadoEntrada{
+    public int IdAdministrador { get; set; }
+    public string Codigoelemento { get; set; } = null!;
+    public bool Mantenimiento { get; set; }
+}
+
+public class Identificadores{
+    public string Codigocomponente{ get; set; } = null!;
+    public string Codigoequipo { get; set; } = null!;
+    public int IdAdministrador { get; set; }
+}

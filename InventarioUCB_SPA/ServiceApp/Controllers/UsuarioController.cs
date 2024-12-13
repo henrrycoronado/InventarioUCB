@@ -8,16 +8,23 @@ namespace InventarioUCB_SPA.Controllers;
 [Route("[controller]")]
 public class UsuarioController : ControllerBase
 {
-    private readonly ILoginService _service;
-    public UsuarioController(ILoginService service)
+    private readonly ILoginService _servicel;
+    private readonly IRegisterService _servicer;
+    public UsuarioController(ILoginService servicel, IRegisterService servicer)
     {
-        _service = service;
+        _servicel = servicel;
+        _servicer = servicer;
     }
 
-    [HttpPost("")]
+    [HttpPost("Loggin")]
     public int? Loggin([FromBody] LoginRequest request)
     {
-        Console.WriteLine("se llego al controlador");
-        return _service.Logear(request.Correo, request.Password);
+        return _servicel.Logear(request.Correo, request.Password);
+    }
+
+    [HttpPost("CrearCuenta")]
+    public string NuevaCuenta([FromBody] UsuarioNuevo user)
+    {
+        return _servicer.RegistrarUsuario(user.usuario, user.IdAdministrador);
     }
 }

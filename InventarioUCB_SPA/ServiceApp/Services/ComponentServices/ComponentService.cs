@@ -95,7 +95,7 @@ public class ComponenteService: IComponentService
         }
         return lista;
     }
-    public string cambiar_estado_componente(string CodigoComponente, bool mantenimiento = false)
+    public string cambiar_estado_componente(string CodigoComponente, int IdAdmin, bool mantenimiento = false)
     {
         var exist = _componente.GetByCodigoComponente(CodigoComponente);
         if(exist == null){

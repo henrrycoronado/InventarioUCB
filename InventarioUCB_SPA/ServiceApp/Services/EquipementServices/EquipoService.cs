@@ -98,7 +98,7 @@ public class EquipoService : IEquipoService
         return lista;
     }
 
-    public string cambiar_estado_equipo(string CodigoEquipo, bool mantenimiento = false)
+    public string cambiar_estado_equipo(string CodigoEquipo, int IdAdmin, bool mantenimiento = false)
     {
         var exist = _equipo.GetByCodigoEquipo(CodigoEquipo);
         if(exist == null){
@@ -140,7 +140,7 @@ public class EquipoService : IEquipoService
         return lista;
     }
 
-    public string AsociarComponenteEquipo(string CodigoComponente, string CodigoEquipo)
+    public string AsociarComponenteEquipo(string CodigoComponente, string CodigoEquipo, int IdAdmin)
     {
         var componente = _componente.GetByCodigoComponente(CodigoComponente);
         var equipo = _equipo.GetByCodigoEquipo(CodigoEquipo);
@@ -171,7 +171,7 @@ public class EquipoService : IEquipoService
             return "Coneccion solicitada, revisar el cambio";
         }
     }
-    public string EliminarComponenteEquipo(string CodigoComponente, string CodigoEquipo)
+    public string EliminarComponenteEquipo(string CodigoComponente, string CodigoEquipo, int IdAdmin)
     {
         var componente = _componente.GetByCodigoComponente(CodigoComponente);
         var equipo = _equipo.GetByCodigoEquipo(CodigoEquipo);

@@ -17,6 +17,12 @@ public class UsuarioModel
     public string? Rol { get; set; }
 }
 
+public class UsuarioNuevo
+{
+    public UsuarioModel usuario { get; set; } = null!;
+    public int IdAdministrador { get; set; }
+}
+
 public class LoginRequest
 {
     public string Correo { get; set; } = null!;
