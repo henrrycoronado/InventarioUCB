@@ -1,46 +1,145 @@
+/* General container styles */
+.contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Styles for the equipment list */
 .lista-equipos {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+  flex: 1;
+  max-width: 800px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow:auto;
+  padding: 10px;
+}
+
+.lista-equipos h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.lista-equipos ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-equipos li {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.lista-equipos li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Styles for the selected equipment details */
+.detalle-equipo {
+  flex: 2;
+  max-width: 600px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.detalle-equipo h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.detalle-equipo p {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+.detalle-equipo button {
+  display: inline-block;
+  margin: 10px 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.detalle-equipo button:hover {
+  background-color: #0056b3;
+}
+
+.detalle-equipo button.eliminar {
+  background-color: #dc3545;
+}
+
+.detalle-equipo button.eliminar:hover {
+  background-color: #a71d2a;
+}
+
+/* Styles for the form */
+.formulario {
+  flex: 2;
+  max-width: 600px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.formulario h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formulario form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.formulario label {
+  font-weight: bold;
+}
+
+.formulario input, .formulario textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formulario button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.formulario button:hover {
+  background-color: #218838;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .contenedor {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .contenedor-scroll {
-    max-height: 400px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
+
+  .lista-equipos, .detalle-equipo, .formulario {
+    max-width: 100%;
   }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-  }
-  
-  button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-  }
-  
+}

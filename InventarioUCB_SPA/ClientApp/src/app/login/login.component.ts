@@ -19,10 +19,17 @@ export class LoginComponent {
 
   submitForm() {
     console.log(this.loginData.Correo + " " + this.loginData.Password);
-    this.http.post<number>(this.baseUrl + 'usuario/', this.loginData).subscribe({
+    this.http.post<number>(this.baseUrl + 'usuario/loggin', this.loginData).subscribe({
       next: (result) => {
+        if(result == null)
+        {
+          alert(`Error al iniciar Sesion.`);
+        }
+        else{
+          alert(`Sesion Iniciada Correctamente`);
+        }
         console.log('Resultado:', result);
-        alert(`Usuario autenticado.`);
+        
       },
       error: (error) => {
         console.error('Error al enviar la solicitud:', error);
