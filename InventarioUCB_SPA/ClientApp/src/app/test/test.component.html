@@ -1,0 +1,19 @@
+<form #equipoForm="ngForm" (submit)="prueba_post(Id_equipo.value, Codigo_Equipo.value, Nombre_equipo.value, Estado_Equipo.value, Detalle_equipo.value)">
+    <label for="Id_equipo">ID del Equipo:</label><br>
+    <input type="number" id="Id_equipo" name="Id_equipo" required #Id_equipo><br><br>
+  
+    <label for="Codigo_Equipo">Código del Equipo:</label><br>
+    <input type="text" id="Codigo_Equipo" name="Codigo_Equipo" required #Codigo_Equipo><br><br>
+  
+    <label for="Nombre_equipo">Nombre del Equipo:</label><br>
+    <input type="text" id="Nombre_equipo" name="Nombre_equipo" required #Nombre_equipo><br><br>
+  
+    <label for="Estado_Equipo">Estado del Equipo:</label><br>
+    <input type="text" id="Estado_Equipo" name="Estado_Equipo" required #Estado_Equipo><br><br>
+  
+    <label for="Detalle_equipo">Detalle del Equipo:</label><br>
+    <input type="text" id="Detalle_equipo" name="Detalle_equipo" required #Detalle_equipo><br><br>
+  
+    <button type="submit">Registrar Equipo</button>
+  </form>
+  
