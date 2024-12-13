@@ -7,21 +7,65 @@ public class EquipoRepository : BaseRepository<Equipo>
 {
     public EquipoRepository(InventarioUcbContext context) : base(context) { }
 
+    public EquipoComponente? ConeccionActiva(int Id_component, int Id_equipo){
+        return _context.EquipoComponentes
+                .Where( e => e.IdComponente == Id_component && e.IdEquipo == Id_equipo && e.Estado == "Asociado")
+                .FirstOrDefault();
+    }
+    public EquipoComponente? ExistioConeccion(int Id_component, int Id_equipo){
+        return _context.EquipoComponentes
+                .Where( e => e.IdComponente == Id_component && e.IdEquipo == Id_equipo && e.Estado == "Eliminado")
+                .FirstOrDefault();
+    }
+    public EquipoComponente? ConeccionConotro(int Id_component, int Id_equipo){
+        return _context.EquipoComponentes
+                .Where( e => e.IdComponente == Id_component && e.Estado == "Asociado" && e.IdEquipo != Id_equipo)
+                .FirstOrDefault();
+    }
+    public void UpdateConeccion(int id_coneccion, EquipoComponente actualizar){
+        var existingEntity = _context.EquipoComponentes.Where(r => r.Id == id_coneccion).FirstOrDefault();
+        if (existingEntity == null){ return ;}
+    
+        _context.Entry(existingEntity).CurrentValues.SetValues(actualizar); // Solo actualiza propiedades
+        _context.SaveChanges();
+    }
+    public void AddComponenteEquipo(EquipoComponente coneccion){
+        _context.EquipoComponentes.Add(coneccion);
+        _context.SaveChanges();
+    }
+    public List<Componentesaccesorio> ConeccionesEquipo(int Id_equipo){
+        return _context.EquipoComponentes
+                .Where( e => e.IdEquipo == Id_equipo && e.Estado == "Asociado")
+                .Join(
+                    _context.Componentesaccesorios,
+                    ec => ec.IdComponente,
+                    c => c.Id,
+                    (ec, c) => c
+                ).ToList();
+                
+    }
+    public List<Componentesaccesorio> ComponentesSinConecciones()
+{
+    return _context.Componentesaccesorios
+        .GroupJoin(
+            _context.EquipoComponentes, // Tabla con la que haremos la unión
+            c => c.Id,                  // Clave en Componentesaccesorios
+            ec => ec.IdComponente,      // Clave en EquipoComponentes
+            (c, ecs) => new { Componente = c, EquipoComponentes = ecs }) // Proyección
+        .Where(x => !x.EquipoComponentes.Any() || 
+                    x.EquipoComponentes.Any(ec => ec.Estado == "Eliminado")) // Filtrar componentes sin conexiones o con estado "Eliminado"
+        .Select(x => x.Componente) // Seleccionar solo el Componente
+        .ToList();
+}
+
+
+
     // Obtener equipos por estado
     public List<Equipo> GetByState(string estado)
     {
         return _context.Equipos
-            .Where(e => e.EstadoEquipo == estado)
+            .Where(e => e.Estado == estado)
             .ToList();
-    }
-    public void AddComponent(int idEquipo, int idComponent){
-        var ConectarEquipoComponent = new EquipoComponente{
-            IdEquipo = idEquipo,
-            IdComponente = idComponent,
-            Estado = "Asociado"
-        };
-        _context.EquipoComponentes.Add(ConectarEquipoComponent);
-        _context.SaveChanges();
     }
     // Obtener equipo por código UCB
     public Equipo? GetByCodigoUcb(string codigoUcb)
@@ -38,18 +82,6 @@ public class EquipoRepository : BaseRepository<Equipo>
     {
         return _context.Equipos
             .FirstOrDefault(e => e.NumeroSerie == numeroSerie);
-    }
-    public bool EstadoEquipoCorrect(string estadoEquipo)
-    {
-        if(estadoEquipo == "Nuevo" || estadoEquipo == "Bueno" || estadoEquipo == "Bueno - Sellado" || estadoEquipo == "Regular" || estadoEquipo == "Usado"){
-            return true;
-        }return false;
-    }
-    public bool EstadoCorrect(string estadoEquipo)
-    {
-        if(estadoEquipo == "Disponible" || estadoEquipo == "Ocupado" || estadoEquipo == "Mantenimiento" || estadoEquipo == "Eliminado"){
-            return true;
-        }return false;
     }
     
 }

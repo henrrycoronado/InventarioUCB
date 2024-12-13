@@ -13,6 +13,7 @@ builder.Services.AddDbContext<InventarioUcbContext>(options =>
         new MySqlServerVersion(new Version(8, 0, 33)) // Ajusta según tu versión de MariaDB
     )
 );
+
 builder.Services.AddScoped<UsuarioRepository>();
 
 builder.Services.AddScoped<ILoginService, LoginServices>();

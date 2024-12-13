@@ -2,10 +2,9 @@ using InventarioUCB_SPA.DataBaseApp.Models.Services;
 using ServicesApp.Models;
 public interface IComponentService
 {
-    bool RegistrarComponente(ComponenteModel componente);
-    ComponenteModel DetalleComponente(int idComponente);
-    bool ActualizarComponente(int idComponente);
-    bool EliminarComponente(int idComponente);
-    bool CambiarComponenteEquipo(int idComponente, int idEquipo);
-    List<ComponenteModel> MostrarComponentes();
+    string RegistrarComponente(ComponenteModelNuevo componente, int IdAdmin);
+    ComponenteModel DetalleComponente(string CodigoComponente);
+    string ActualizarComponente(ComponenteModel componente, int IdAdmin);
+    string EliminarComponente(string CodigoComponente, int IdAdmin);
+    List<ComponenteModel> MostrarComponentes(string estado);
 }

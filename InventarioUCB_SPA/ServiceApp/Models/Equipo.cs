@@ -1,6 +1,6 @@
 using InventarioUCB_SPA.DataBaseApp.Models.Services;
 namespace ServicesApp.Models;
-public class EquipoModel
+public class EquipoModelNuevo
 {
     public string? CodigoUcb { get; set; }
 
@@ -21,6 +21,8 @@ public class EquipoModel
     public string Ubicacion { get; set; } = null!;
 
     public string? EstadoEquipo { get; set; }
+}
 
-    public string? Estado { get; set; }
+public class EquipoModel: EquipoModelNuevo{
+    public string? Estado { get; set; } = null!;
 }
