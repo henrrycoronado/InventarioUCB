@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "InventarioUCB_SPA"
+  "defaultProject": "InventarioUCB_SPA",
+  "cli": {
+    "analytics": false
+  }
 }
