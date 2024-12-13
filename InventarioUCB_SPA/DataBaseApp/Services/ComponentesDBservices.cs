@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace InventarioUCB_SPA.DataBaseApp.Models.Services;
-public class ComponenteRepository : BaseRepository<Equipo>
+public class ComponenteRepository : BaseRepository<Componentesaccesorio>
 {
     public ComponenteRepository(InventarioUcbContext context) : base(context) { }
 
@@ -25,12 +25,12 @@ public class ComponenteRepository : BaseRepository<Equipo>
         return _context.Componentesaccesorios
             .FirstOrDefault(e => e.CodigoComponente == codigoComponent);
     }
-    public Equipo? GetByNumeroSerie(string numeroSerie)
+    public Componentesaccesorio? GetByNumeroSerie(string numeroSerie)
     {
-        return _context.Equipos
+        return _context.Componentesaccesorios
             .FirstOrDefault(e => e.NumeroSerie == numeroSerie);
     }
-    public bool EstadoEquipoCorrect(string estadoEquipo)
+    public bool EstadoComponentCorrect(string estadoEquipo)
     {
         if(estadoEquipo == "Nuevo" || estadoEquipo == "Bueno" || estadoEquipo == "Bueno - Sellado" || estadoEquipo == "Regular" || estadoEquipo == "Usado"){
             return true;

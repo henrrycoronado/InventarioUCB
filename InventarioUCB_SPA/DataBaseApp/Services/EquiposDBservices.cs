@@ -14,6 +14,15 @@ public class EquipoRepository : BaseRepository<Equipo>
             .Where(e => e.EstadoEquipo == estado)
             .ToList();
     }
+    public void AddComponent(int idEquipo, int idComponent){
+        var ConectarEquipoComponent = new EquipoComponente{
+            IdEquipo = idEquipo,
+            IdComponente = idComponent,
+            Estado = "Asociado"
+        };
+        _context.EquipoComponentes.Add(ConectarEquipoComponent);
+        _context.SaveChanges();
+    }
     // Obtener equipo por código UCB
     public Equipo? GetByCodigoUcb(string codigoUcb)
     {
@@ -42,4 +51,5 @@ public class EquipoRepository : BaseRepository<Equipo>
             return true;
         }return false;
     }
+    
 }
