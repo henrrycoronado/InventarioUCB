@@ -2,50 +2,64 @@
     AQUI SE MUESTRA EL FORMULARIO PARA CREAR UN NUEVO EQUIPO
 </body>
 
-<body>
-    AQUI SE MUESTRA EL FORMULARIO PARA LA CREACION DE UN COMPONENTE
-</body>
-
-<div class="overlay" *ngIf="isFormOpen" (click)="closeForm()"></div>
-<div class="form-popup" *ngIf="isFormOpen">
-  <h2>REGISTRAR NUEVO EQUIPO</h2>
-  <form (submit)="submitForm()">
-
-    <h6 for="name">Codigo Equipo:</h6>
-    <input id="name" type="text" [(ngModel)]="formData.name" name="name" required>
-
-    <h6 for="name">Numero de Serie:</h6>
-    <input id="name" type="text" [(ngModel)]="formData.name" name="name" required>
-
-    <h6 for="name">Nombre del Equipo:</h6>
-    <input id="name" type="text" [(ngModel)]="formData.name" name="name" required>
-
-    <h6 for="email">Manufacturero:</h6>
-    <label>____</label>
-    <input id="email" type="email" [(ngModel)]="formData.email" name="email" required>
-
-    <h6 for="message">Codigo de Producto</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-
-    <h6 for="message">Estado</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-
-    <h6 for="message">Detale</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-    
-    <h6 for="message">Categoria</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-
-    <h6 for="description">Ubicacion:</h6>
-    <label>Gabinete en el que se encuentran</label>
-    <textarea id="description" [(ngModel)]="formData.description" name="description" required></textarea>
-
-    <h6 for="message">Link Datasheet</h6>
-    <textarea id="message" [(ngModel)]="formData.message" name="message" required></textarea>
-
-    <div class="form-buttons">
-      <button type="submit" class="btn-submit">Crear Componente</button>
-      <button type="button" class="btn-cancel" (click)="closeForm()">Cancelar</button>
+<div class="registro-equipo">
+  <h2>Registrar Nuevo Equipo</h2>
+  <form (ngSubmit)="registrarEquipo()">
+    <div>
+      <label for="codigoUcb">Código UCB:</label>
+      <input id="codigoUcb" [(ngModel)]="equipoData.CodigoUcb" name="codigoUcb" required />
     </div>
+
+    <div>
+      <label for="codigoEquipo">Código de Equipo:</label>
+      <input id="codigoEquipo" [(ngModel)]="equipoData.CodigoEquipo" name="codigoEquipo" required />
+    </div>
+
+    <div>
+      <label for="numeroSerie">Número de Serie:</label>
+      <input id="numeroSerie" [(ngModel)]="equipoData.NumeroSerie" name="numeroSerie" />
+    </div>
+
+    <div>
+      <label for="fabricante">Fabricante:</label>
+      <input id="fabricante" [(ngModel)]="equipoData.Fabricante" name="fabricante" />
+    </div>
+
+    <div>
+      <label for="direccionEnlace">Dirección de Enlace:</label>
+      <input id="direccionEnlace" [(ngModel)]="equipoData.DireccionEnlace" name="direccionEnlace" />
+    </div>
+
+    <div>
+      <label for="nombre">Nombre del Equipo:</label>
+      <input id="nombre" [(ngModel)]="equipoData.Nombre" name="nombre" required />
+    </div>
+
+    <div>
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" [(ngModel)]="equipoData.Descripcion" name="descripcion"></textarea>
+    </div>
+
+    <div>
+      <label for="idCategoria">Categoría:</label>
+      <input id="idCategoria" [(ngModel)]="equipoData.IdCategoria" name="idCategoria" type="number" required />
+    </div>
+
+    <div>
+      <label for="ubicacion">Ubicación:</label>
+      <input id="ubicacion" [(ngModel)]="equipoData.Ubicacion" name="ubicacion" required />
+    </div>
+
+    <div>
+      <label for="estadoEquipo">Estado del Equipo:</label>
+      <input id="estadoEquipo" [(ngModel)]="equipoData.EstadoEquipo" name="estadoEquipo" />
+    </div>
+
+    <div>
+      <label for="estado">Estado:</label>
+      <input id="estado" [(ngModel)]="equipoData.Estado" name="estado" />
+    </div>
+
+    <button type="submit">Registrar Equipo</button>
   </form>
 </div>

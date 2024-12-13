@@ -9,26 +9,33 @@ import { Router } from '@angular/router';
 })
 export class CrearEquipoComponent {
 
-  isFormOpen = false;
-  formData = {
-    name: '',
-    email: '',
-    message: '',
-    description:''
+  equipoData = {
+    CodigoUcb: '',
+    CodigoEquipo: '',
+    NumeroSerie: '',
+    Fabricante: '',
+    DireccionEnlace: '',
+    Nombre: '',
+    Descripcion: '',
+    IdCategoria: 0,
+    Ubicacion: '',
+    EstadoEquipo: '',
+    Estado: '',
   };
 
-  openForm() {
-    this.isFormOpen = true;
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  closeForm() {
-    this.isFormOpen = false;
-  }
-
-  submitForm() {
-    alert(`Formulario enviado:\nNombre: ${this.formData.name}\nCorreo: ${this.formData.email}\nMensaje: ${this.formData.message}`);
-    this.isFormOpen = false;
-    this.formData = { name: '', email: '', message: '', description: '' }; // Reiniciar datos del formulario
+  registrarEquipo(): void {
+    this.http.post('tu_api_base_url/equipos', this.equipoData).subscribe({
+      next: (response) => {
+        alert('Equipo registrado correctamente');
+        this.router.navigate(['/equipos']);
+      },
+      error: (error) => {
+        console.error('Error al registrar el equipo:', error);
+        alert('Ocurrió un error al registrar el equipo.');
+      },
+    });
   }
 
 }
