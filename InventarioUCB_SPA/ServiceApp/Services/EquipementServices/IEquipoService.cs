@@ -9,7 +9,7 @@ public interface IEquipoService
     string ActualizarEquipo(EquipoModel equipo, int IdAdmin);
     string EliminarEquipo(string CodigoEquipo, int IdAdmin);
     string cambiar_estado_equipo(string CodigoEquipo, int IdAdmin, bool mantenimiento = false);
-    List<EquipoModel> MostrarEquipos(string estado);
+    List<EquipoModel> MostrarEquipos();
     List<ComponenteModel> VerComponentesAsociados(string codigoEquipo);
     List<ComponenteModel> VerComponentesNoAsociados();
     string AsociarComponenteEquipo(string CodigoComponente, string CodigoEquipo, int IdAdmin);

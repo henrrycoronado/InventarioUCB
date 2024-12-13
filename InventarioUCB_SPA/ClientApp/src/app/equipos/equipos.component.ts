@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-equipos',
@@ -7,47 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./equipos.component.css']
 })
 export class EquiposComponent implements OnInit {
-  equipos = [
-    {
-      CodigoUcb: 'UCB-001',
-      CodigoEquipo: 'EQ-1001',
-      NumeroSerie: 'SN12345',
-      Fabricante: 'Dell',
-      DireccionEnlace: 'http://example.com/equipo1',
-      Nombre: 'Laptop Administrativa',
-      Descripcion: 'Laptop para tareas administrativas',
-      IdCategoria: 1,
-      Ubicacion: 'Oficina 101',
-      EstadoEquipo: 'Activo',
-      Estado: 'En uso',
-    },
-    {
-      CodigoUcb: 'UCB-002',
-      CodigoEquipo: 'EQ-1002',
-      NumeroSerie: 'SN67890',
-      Fabricante: 'HP',
-      DireccionEnlace: 'http://example.com/equipo2',
-      Nombre: 'Impresora Color',
-      Descripcion: 'Impresora de alta calidad para documentos',
-      IdCategoria: 2,
-      Ubicacion: 'Sala de impresión',
-      EstadoEquipo: 'Inactivo',
-      Estado: 'En reparación',
-    },
-    {
-      CodigoUcb: 'UCB-003',
-      CodigoEquipo: 'EQ-1003',
-      NumeroSerie: 'SN24680',
-      Fabricante: 'Lenovo',
-      DireccionEnlace: 'http://example.com/equipo3',
-      Nombre: 'Proyector Salón 3',
-      Descripcion: 'Proyector para presentaciones en el Salón 3',
-      IdCategoria: 3,
-      Ubicacion: 'Salón 3',
-      EstadoEquipo: 'Activo',
-      Estado: 'Disponible',
-    },
-  ]; // Lista de equipos cargada desde la API
+  equiponuevo:any;
+  idAdministrador = 1;
+  //codigoequipo:any ;
+
+  equipos: any[] = [];
   equipoSeleccionado: any = null; // Equipo actualmente seleccionado para mostrar detalles
   equipoData = { // Datos del nuevo equipo
     CodigoUcb: '',
@@ -79,15 +44,16 @@ export class EquiposComponent implements OnInit {
     { label: 'Estado', key: 'Estado' },
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private router: Router, @Inject('BASE_URL') private baseUrl: string) {}
 
   ngOnInit(): void {
     this.cargarEquipos();
   }
 
   cargarEquipos(): void {
-    this.http.get<any[]>('tu_api_base_url/equipos').subscribe(
+    this.http.get<any[]>(this.baseUrl + 'equipo/verequipos').subscribe(
       (data) => {
+        console.log(data);
         this.equipos = data;
       },
       (error) => {
@@ -97,18 +63,37 @@ export class EquiposComponent implements OnInit {
   }
 
   seleccionarEquipo(equipo: any): void {
-    this.equipoSeleccionado = { ...equipo }; // Clonar para evitar mutaciones directas
+    //this.codigoequipo = equipo.codigoEquipo;
+    this.equipoSeleccionado = { ...equipo };
+     // Clonar para evitar mutaciones directas
     this.modoEdicion = false; // Asegúrate de que no está en modo edición
     this.mostrarFormulario = false; // Ocultar el formulario de registro si está abierto
   }
-  
 
   habilitarEdicion(): void {
     this.modoEdicion = true;
   }
 
   guardarCambios(): void {
-    this.http.put(`tu_api_base_url/equipos/${this.equipoSeleccionado.id}`, this.equipoSeleccionado).subscribe(
+
+    const equipoEntradaUpdate = {
+      equipo: {
+        CodigoEquipo: this.equipoSeleccionado.codigoEquipo,
+        CodigoUcb: this.equipoSeleccionado.codigoUcb,
+        Descripcion: this.equipoSeleccionado.descripcion,
+        DireccionEnlace: this.equipoSeleccionado.direccionEnlace,
+        Estado: this.equipoSeleccionado.estado,
+        EstadoEquipo: this.equipoSeleccionado.estadoEquipo,
+        Fabricante: this.equipoSeleccionado.fabricante,
+        IdCategoria: this.equipoSeleccionado.idCategoria,
+        Nombre: this.equipoSeleccionado.nombre,
+        NumeroSerie: this.equipoSeleccionado.numeroSerie,
+        Ubicacion: this.equipoSeleccionado.ubicacion,
+      },
+      IdAdministrador: this.idAdministrador,
+    };
+
+    this.http.put(this.baseUrl + 'equipo/ActualizarEquipo', equipoEntradaUpdate).subscribe(
       () => {
         alert('Equipo actualizado correctamente');
         this.cargarEquipos(); // Recargar la lista de equipos
@@ -123,7 +108,8 @@ export class EquiposComponent implements OnInit {
 
   eliminarEquipo(): void {
     if (confirm('¿Estás seguro de que deseas eliminar este equipo?')) {
-      this.http.delete(`tu_api_base_url/equipos/${this.equipoSeleccionado.id}`).subscribe(
+      const codigo = {codigoequipo:0, IdAdministrador:1};
+      this.http.post(this.baseUrl + 'equipo/eliminarEquipo' , codigo).subscribe(
         () => {
           alert('Equipo eliminado correctamente');
           this.cargarEquipos(); // Recargar la lista de equipos
@@ -143,7 +129,8 @@ export class EquiposComponent implements OnInit {
   }
 
   registrarEquipo(): void {
-    this.http.post('tu_api_base_url/equipos', this.equipoData).subscribe(
+    this.equiponuevo = {equipo:this.equipoData, IdAdministrador: 0 }; 
+    this.http.post('Equipo/CrearEquipo', this.equiponuevo).subscribe(
       () => {
         alert('Equipo registrado correctamente');
         this.cargarEquipos();
@@ -156,7 +143,6 @@ export class EquiposComponent implements OnInit {
       }
     );
   }
-
   resetearFormulario(): void {
     this.equipoData = {
       CodigoUcb: '',

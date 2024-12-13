@@ -38,10 +38,10 @@ public class EquipoController : ControllerBase
         return _service.EliminarEquipo(entrada.Codigoequipo, entrada.IdAdministrador);
     }
 
-    [HttpGet("VerEquipos/{estado}")]
-    public IEnumerable<EquipoModel> VerEquipos(string estado)
+    [HttpGet("VerEquipos")]
+    public IEnumerable<EquipoModel> VerEquipos()
     {
-        return _service.MostrarEquipos(estado);
+        return _service.MostrarEquipos();
     }
 
     [HttpPost("CambiarEstadoEquipo")]

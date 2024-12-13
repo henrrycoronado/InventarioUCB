@@ -87,8 +87,9 @@ public class EquipoService : IEquipoService
         return "Revisar Cambios de eliminacion";
     }
 
-    public List<EquipoModel> MostrarEquipos(string estado = "Disponible")
+    public List<EquipoModel> MostrarEquipos()
     {
+        string estado = "Disponible";
         var result = _equipo.GetByState(estado);
         List<EquipoModel> lista = new List<EquipoModel>();
         foreach (var equipo in result)

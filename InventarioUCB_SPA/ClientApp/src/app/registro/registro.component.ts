@@ -26,11 +26,11 @@ export class RegistroComponent {
 
   submitForm() {
     console.log('Datos del usuario:', this.usuarioData);
-    this.http.post<number>(this.baseUrl + 'usuario/', this.usuarioData).subscribe({
+    this.http.post<number>(this.baseUrl + 'usuario/crearcuenta', {usuario:this.usuarioData, idAdministrador: 1}).subscribe({
       next: (result) => {
         console.log('Resultado:', result);
         alert(`Usuario registrado exitosamente.`);
-        this.router.navigate(['/dashboard']); // Cambia '/dashboard' por la ruta deseada.
+        this.router.navigate(['/login']);
       },
       error: (error) => {
         console.error('Error al enviar la solicitud:', error);
