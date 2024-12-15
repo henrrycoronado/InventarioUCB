@@ -15,10 +15,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let equipo of equipos">
-              <td>{{ equipo.Nombre }}</td>
-              <td>{{ equipo.CodigoUcb }}</td>
-              <td>{{ equipo.Ubicacion }}</td>
-              <td>{{ equipo.Estado }}</td>
+              <td>{{ equipo.nombre }}</td>
+              <td>{{ equipo.codigoUcb }}</td>
+              <td>{{ equipo.ubicacion }}</td>
+              <td>{{ equipo.estado }}</td>
               <td>
                 <button (click)="seleccionarEquipo(equipo)">+</button>
               </td>
@@ -42,21 +42,21 @@
         <button type="submit">GUARDAR</button>
       </form>
       <div *ngIf="!modoEdicion">
-        <p><strong>Nombre:</strong> {{ equipoSeleccionado.Nombre }}</p>
-        <p><strong>Código UCB:</strong> {{ equipoSeleccionado.CodigoUcb }}</p>
-        <p><strong>Código de Equipo:</strong> {{ equipoSeleccionado.CodigoEquipo }}</p>
-        <p><strong>Número de Serie:</strong> {{ equipoSeleccionado.NumeroSerie }}</p>
-        <p><strong>Fabricante:</strong> {{ equipoSeleccionado.Fabricante }}</p>
+        <p><strong>Nombre:</strong> {{ equipoSeleccionado.nombre }}</p>
+        <p><strong>Código UCB:</strong> {{ equipoSeleccionado.codigoUcb }}</p>
+        <p><strong>Código de Equipo:</strong> {{ equipoSeleccionado.codigoEquipo }}</p>
+        <p><strong>Número de Serie:</strong> {{ equipoSeleccionado.numeroSerie }}</p>
+        <p><strong>Fabricante:</strong> {{ equipoSeleccionado.fabricante }}</p>
         <p><strong>Dirección de Enlace:</strong> 
-          <a [href]="equipoSeleccionado.DireccionEnlace" target="_blank">
-            {{ equipoSeleccionado.DireccionEnlace }}
+          <a [href]="equipoSeleccionado.direccionEnlace" target="_blank">
+            {{ equipoSeleccionado.direccionEnlace }}
           </a>
         </p>
-        <p><strong>Descripción:</strong> {{ equipoSeleccionado.Descripcion }}</p>
-        <p><strong>Categoría:</strong> {{ equipoSeleccionado.IdCategoria }}</p>
-        <p><strong>Ubicación:</strong> {{ equipoSeleccionado.Ubicacion }}</p>
-        <p><strong>Estado del Equipo:</strong> {{ equipoSeleccionado.EstadoEquipo }}</p>
-        <p><strong>Estado:</strong> {{ equipoSeleccionado.Estado }}</p>
+        <p><strong>Descripción:</strong> {{ equipoSeleccionado.descripcion }}</p>
+        <p><strong>Categoría:</strong> {{ equipoSeleccionado.idCategoria }}</p>
+        <p><strong>Ubicación:</strong> {{ equipoSeleccionado.ubicacion }}</p>
+        <p><strong>Estado del Equipo:</strong> {{ equipoSeleccionado.estadoEquipo }}</p>
+        <p><strong>Estado:</strong> {{ equipoSeleccionado.estado }}</p>
       </div>
     </div>
   

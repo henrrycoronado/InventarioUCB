@@ -130,7 +130,7 @@ export class EquiposComponent implements OnInit {
 
   registrarEquipo(): void {
     this.equiponuevo = {equipo:this.equipoData, IdAdministrador: 0 }; 
-    this.http.post('Equipo/CrearEquipo', this.equiponuevo).subscribe(
+    this.http.post('equipo/CrearEquipo', this.equiponuevo).subscribe(
       () => {
         alert('Equipo registrado correctamente');
         this.cargarEquipos();
