@@ -53,47 +53,10 @@ export class CrearCategoriaComponent {
     this.modoEdicion = true;
   }
 
-  guardarCambios(): void {
-    const categoriaEntradaUpdate = {
-      categoria: {
-        nombre: this.categoriaSeleccionada.nombre,
-        area: this.categoriaSeleccionada.area
-      }
-    };
-
-    this.http.post(this.baseUrl + 'categoria/actualizarcategoria', categoriaEntradaUpdate).subscribe(
-      () => {
-        alert('Categoría actualizada correctamente');
-        this.cargarCategorias(); // Recargar la lista de categorías
-        this.modoEdicion = false;
-      },
-      (error) => {
-        console.error('Error al actualizar la categoría:', error);
-        alert('Ocurrió un error al actualizar la categoría.');
-      }
-    );
-  }
 
   cancelarEdicion(): void {
     this.modoEdicion = false;
     this.categoriaSeleccionada = null; // Ocultar los detalles
-  }
-
-  eliminarCategoria(): void {
-    if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
-      const nombre = { nombre: this.categoriaSeleccionada.nombre };
-      this.http.post(this.baseUrl + 'categoria/eliminarcategoria', nombre).subscribe(
-        () => {
-          alert('Categoría eliminada correctamente');
-          this.cargarCategorias(); // Recargar la lista de categorías
-          this.categoriaSeleccionada = null;
-        },
-        (error) => {
-          console.error('Error al eliminar la categoría:', error);
-          alert('Ocurrió un error al eliminar la categoría.');
-        }
-      );
-    }
   }
 
   mostrarFormularioNuevaCategoria(): void {
@@ -118,6 +81,7 @@ export class CrearCategoriaComponent {
         alert('Ocurrió un error al registrar la categoría.');
       }
     );
+    this.cargarCategorias();
   }
 
   cancelarFormulario(): void {

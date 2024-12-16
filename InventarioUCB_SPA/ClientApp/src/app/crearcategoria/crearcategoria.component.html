@@ -14,7 +14,7 @@
           <tbody>
             <tr *ngFor="let categoria of categorias">
               <td>{{ categoria.nombre }}</td>
-              <td>{{ categoria.area.join(', ') }}</td>
+              <td>{{ categoria.area }}</td>
               <td>
                 <button (click)="seleccionarCategoria(categoria)">+</button>
               </td>
@@ -28,19 +28,10 @@
     <!-- Category details -->
     <div class="detalle-categoria" *ngIf="categoriaSeleccionada && !mostrarFormulario">
       <h2>Detalles de la Categoría</h2>
-      <button class="eliminar" (click)="eliminarCategoria()">ELIMINAR</button>
-      <button (click)="habilitarEdicion()" *ngIf="!modoEdicion">ACTUALIZAR</button>
-      <form *ngIf="modoEdicion" (ngSubmit)="guardarCambios()">
-        <div *ngFor="let campo of camposCategoria">
-          <label>{{ campo.label }}</label>
-          <input [(ngModel)]="categoriaSeleccionada[campo.key]" [name]="campo.key" required />
-        </div>
-        <button type="submit">GUARDAR</button>
-        <button type="button" (click)="cancelarEdicion()">CANCELAR</button>
-      </form>
+      
       <div *ngIf="!modoEdicion">
         <p><strong>Nombre:</strong> {{ categoriaSeleccionada.nombre }}</p>
-        <p><strong>Área:</strong> {{ categoriaSeleccionada.area.join(', ') }}</p>
+        <p><strong>Área:</strong> {{ categoriaSeleccionada.area }}</p>
       </div>
     </div>
   

@@ -15,41 +15,40 @@ export class EquiposComponent implements OnInit {
   equipos: any[] = [];
   equipoSeleccionado: any = null; // Equipo actualmente seleccionado para mostrar detalles
   equipoData = { // Datos del nuevo equipo
-    CodigoEquipo: '',
     CodigoUcb: '',
-    Descripcion: '',
-    DireccionEnlace: '',
-    Estado: '',
-    EstadoEquipo: '',
-    Fabricante: '',
-    IdCategoria: 0,
-    Nombre: '',
+    CodigoEquipo: '',
     NumeroSerie: '',
-    Ubicacion: ''
+    Fabricante: '',
+    DireccionEnlace: '',
+    Nombre: '',
+    Descripcion: '',
+    IdCategoria: 0,
+    Ubicacion: '',
+    EstadoEquipo: ''
   };
+  categorias: any[] = [];
   
   mostrarFormulario = false; // Controla la visibilidad del formulario de registro
   modoEdicion = false; // Indica si estamos editando un equipo
 
   camposEquipo = [ // Configuración de los campos del equipo para el formulario dinámico
-    { label: 'Código de Equipo', key: 'CodigoEquipo' },
     { label: 'Código UCB', key: 'CodigoUcb' },
-    { label: 'Descripción', key: 'Descripcion' },
-    { label: 'Dirección de Enlace', key: 'DireccionEnlace' },
-    { label: 'Estado', key: 'Estado' },
-    { label: 'Estado del Equipo', key: 'EstadoEquipo' },
-    { label: 'Fabricante', key: 'Fabricante' },
-    { label: 'Categoría', key: 'IdCategoria' },
-    { label: 'Nombre del Equipo', key: 'Nombre' },
+    { label: 'Código de Equipo', key: 'CodigoEquipo' },
     { label: 'Número de Serie', key: 'NumeroSerie' },
-    { label: 'Ubicación', key: 'Ubicacion' }
-  ];
-  
+    { label: 'Fabricante', key: 'Fabricante' },
+    { label: 'Dirección de Enlace', key: 'DireccionEnlace' },
+    { label: 'Nombre del Equipo', key: 'Nombre' },
+    { label: 'Descripción', key: 'Descripcion' },
+    { label: 'Categoría', key: 'IdCategoria' },
+    { label: 'Ubicación', key: 'Ubicacion' },
+    { label: 'Estado del Equipo', key: 'EstadoEquipo' }
+  ];  
 
   constructor(private http: HttpClient,private router: Router, @Inject('BASE_URL') private baseUrl: string) {}
 
   ngOnInit(): void {
     this.cargarEquipos();
+    this.cargarCategorias();
   }
 
   cargarEquipos(): void {
@@ -72,6 +71,18 @@ export class EquiposComponent implements OnInit {
     this.mostrarFormulario = false; // Ocultar el formulario de registro si está abierto
   }
 
+  cargarCategorias(): void {
+    this.http.get<any[]>(this.baseUrl + 'categoria/vercategorias').subscribe(
+      (data) => {
+        console.log(data);
+        this.categorias = data;
+      },
+      (error) => {
+        console.error('Error al cargar categorías:', error);
+      }
+    );
+  }
+
   habilitarEdicion(): void {
     this.modoEdicion = true;
   }
@@ -84,7 +95,6 @@ export class EquiposComponent implements OnInit {
         codigoUcb: this.equipoSeleccionado.codigoUcb,
         descripcion: this.equipoSeleccionado.descripcion,
         direccionEnlace: this.equipoSeleccionado.direccionEnlace,
-        estado: this.equipoSeleccionado.estado,
         estadoEquipo: this.equipoSeleccionado.estadoEquipo,
         fabricante: this.equipoSeleccionado.fabricante,
         idCategoria: this.equipoSeleccionado.idCategoria,
@@ -106,6 +116,7 @@ export class EquiposComponent implements OnInit {
         alert('Ocurrió un error al actualizar el equipo.');
       }
     );
+    this.cargarEquipos();
   }
 
   eliminarEquipo(): void {
@@ -123,6 +134,7 @@ export class EquiposComponent implements OnInit {
         }
       );
     }
+    this.cargarEquipos();
   }
 
   mostrarFormularioNuevoEquipo(): void {
@@ -131,7 +143,7 @@ export class EquiposComponent implements OnInit {
   }
 
   registrarEquipo(): void {
-    this.equiponuevo = {equipo:this.equipoData, IdAdministrador: 0 }; 
+    this.equiponuevo = {equipo:this.equipoData, IdAdministrador: 1 }; 
     this.http.post('equipo/CrearEquipo', this.equiponuevo).subscribe(
       () => {
         alert('Equipo registrado correctamente');
@@ -144,20 +156,20 @@ export class EquiposComponent implements OnInit {
         alert('Ocurrió un error al registrar el equipo.');
       }
     );
+    this.cargarEquipos();
   }
   resetearFormulario(): void {
     this.equipoData = { // Datos del nuevo equipo
-      CodigoEquipo: '',
       CodigoUcb: '',
-      Descripcion: '',
-      DireccionEnlace: '',
-      Estado: '',
-      EstadoEquipo: '',
-      Fabricante: '',
-      IdCategoria: 0,
-      Nombre: '',
+      CodigoEquipo: '',
       NumeroSerie: '',
-      Ubicacion: ''
+      Fabricante: '',
+      DireccionEnlace: '',
+      Nombre: '',
+      Descripcion: '',
+      IdCategoria: 0,
+      Ubicacion: '',
+      EstadoEquipo: ''
     };
   }
 }

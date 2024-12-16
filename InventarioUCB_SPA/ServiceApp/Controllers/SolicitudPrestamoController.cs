@@ -32,7 +32,7 @@ public class SolicitudPrestamoController : ControllerBase
         return _service.RemoveDetalle(request.IdElement1, request.IdElement2);
     }
 
-    [HttpGet("VerSoicitudes")]
+    [HttpGet("VerSolicitudes")]
     public IEnumerable<Solicitudesprestamo> Mostrar()
     {
         return _service.mostrarSolicitudesPrestamo();

@@ -1,8 +1,6 @@
-<body>
-    MOSTRAR LAS SOLICITUDES DE PRESTAMO
-</body>
-
-<div class="lista-solicitudes">
+<div class="contenedor">
+  <!-- Solicitudes de préstamo -->
+  <div class="lista-solicitudes">
     <h2>Solicitudes de Préstamo</h2>
     <div class="contenedor-scroll">
       <table>
@@ -18,30 +16,36 @@
         </thead>
         <tbody>
           <tr *ngFor="let solicitud of solicitudesPrestamo">
-            <!-- Nombre del Equipo -->
             <td>{{ solicitud.IdEquipoNavigation?.Nombre || 'N/A' }}</td>
-  
-            <!-- Estado del Equipo -->
-            <td>{{ solicitud.IdEquipoNavigation?.EstadoEquipo || 'N/A' }}</td>
-  
-            <!-- Nombre del Usuario -->
+            <td>{{ solicitud.IdEquipoNavigation?.estado || 'N/A' }}</td>
             <td>{{ solicitud.IdSolicitudPrestamoNavigation?.IdUsuarioNavigation?.Nombre || 'N/A' }} 
                 {{ solicitud.IdSolicitudPrestamoNavigation?.IdUsuarioNavigation?.Apellido || '' }}
             </td>
-  
-            <!-- Estado de la Solicitud -->
-            <td>{{ solicitud.Estado || 'N/A' }}</td>
-  
-            <!-- Fecha de la Solicitud -->
-            <td>{{ (solicitud.IdSolicitudPrestamoNavigation?.FechaSolicitud || 'N/A') | date: 'shortDate' }}</td>
-
-            <!-- Botón de acción -->
+            <td>{{ solicitud.estado || 'N/A' }}</td>
+            <td>{{ (solicitud.fechaSolicitud || 'N/A') | date: 'shortDate' }}</td>
             <td>
-              <button (click)="redirigir(solicitud.IdSolicitudPrestamo)">+</button>
+              <button (click)="verDetallesSolicitud(solicitud)">+</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  
+
+  <!-- Detalle de la solicitud -->
+  <div class="detalle-solicitud" *ngIf="solicitudSeleccionada">
+    <h2>Detalles de la Solicitud</h2>
+    <div>
+      <p><strong>Nombre del Equipo:</strong> {{ solicitudSeleccionada.IdEquipoNavigation?.Nombre || 'N/A' }}</p>
+      <p><strong>Estado del Equipo:</strong> {{ solicitudSeleccionada.IdEquipoNavigation?.EstadoEquipo || 'N/A' }}</p>
+      <p><strong>Nombre del Usuario:</strong> {{ solicitudSeleccionada.IdSolicitudPrestamoNavigation?.IdUsuarioNavigation?.Nombre || 'N/A' }} 
+          {{ solicitudSeleccionada.IdSolicitudPrestamoNavigation?.IdUsuarioNavigation?.Apellido || '' }}</p>
+      <p><strong>Estado de la Solicitud:</strong> {{ solicitudSeleccionada.estado || 'N/A' }}</p>
+      <p><strong>Fecha de la Solicitud:</strong> {{ (solicitudSeleccionada.fechaSolicitud || 'N/A') | date: 'shortDate' }}</p>
+    </div>
+    <textarea [(ngModel)]="justificacion" placeholder="Escribe una justificación..." rows="4"></textarea>
+    <button (click)="aprobarSolicitud()">Aprobar</button>
+    <button (click)="rechazarSolicitud()">Rechazar</button>
+    <button (click)="cerrarDetalle()">Cancelar</button>
+  </div>
+</div>
