@@ -15,4 +15,20 @@ public class DetalleSolicitudPrestamoRepository : BaseRepository<Detallessolicit
         .Where(d => d.Estado == "Seleccionado" && d.IdSolicitudPrestamo == idSolicitud)
         .ToList();
     }
+    public bool ChangeStateDetalleSolicitud(int idDetalleSoli){
+        try{
+            var ds = GetById(idDetalleSoli);
+            if(ds == null){return false;}
+            if(ds.Estado == "Seleccionado"){
+                ds.Estado = "Quitado";
+                if(Update(ds, ds.Id)){
+                    return true;
+                }
+            }
+            return false;
+        }catch(Exception e){
+            Console.WriteLine(e);
+            return false;
+        }
+    }
 }

@@ -59,11 +59,4 @@ public class UsuarioRepository : BaseRepository<Usuario>
         Add(user);
     } 
 
-    public bool RolCorrect(string rol)
-    {
-        if(rol == "Cliente" || rol == "Administrativo" || rol == "Root"){
-            return true;
-        }return false;
-    }
-
 }
