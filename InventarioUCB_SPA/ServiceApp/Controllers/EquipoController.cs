@@ -34,9 +34,9 @@ public class EquipoController : ControllerBase
     }
 
     [HttpPost("EliminarEquipo")]
-    public string Eliminar([FromBody] EquipoUpdate entrada )
+    public string Eliminar([FromBody] Ids entrada )
     {
-        return _service.EliminarEquipo(entrada.equipo.Id, entrada.IdAdministrador);
+        return _service.EliminarEquipo(entrada.IdElement1, entrada.IdElement2);
     }
 
     [HttpGet("VerEquipos")]
