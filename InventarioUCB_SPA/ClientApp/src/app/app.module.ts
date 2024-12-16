@@ -31,6 +31,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { SolicitudesPrestamoComponent } from './solicitudesprestamos/solicitudesprestamo.component';
+import { SolicitudesAprobadasComponent } from './solictudesaprobadas/solicitudesaprobadas.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SolicitudesPrestamoComponent } from './solicitudesprestamos/solicitudes
     RegistroComponent,
     ReportesComponent,
     SolicitudesPrestamoComponent,
+    SolicitudesAprobadasComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -91,7 +93,8 @@ import { SolicitudesPrestamoComponent } from './solicitudesprestamos/solicitudes
       { path: 'login', component: LoginComponent },
       { path: 'registro', component: RegistroComponent },
       { path: 'reportes', component: ReportesComponent },
-      { path: 'solicitudesprestamo', component: SolicitudesPrestamoComponent },
+      { path: 'solicitudesprestamo', component: SolicitudesPrestamoComponent }, 
+      { path: 'solicitudesaprobadas', component: SolicitudesAprobadasComponent }, //gestionaraprobaciones
     ])
   ],
   providers: [],

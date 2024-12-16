@@ -1,11 +1,11 @@
 using InventarioUCB_SPA.DataBaseApp.Models.Services;
 using ServicesApp.Models;
 namespace ServicesApp.Models.Services;
-public class GestionarSolicitudService : IGestionarSolicitudService
+public class GestionarAprobacionesService : IGestionarAprobacionesService
 {
     private readonly SolicitudPrestamoRepository _solicitud;
     private readonly IPrestamoService _prestamoService;
-    public GestionarSolicitudService(SolicitudPrestamoRepository solicitud, PrestamoRepository prestamo, IPrestamoService prestamoService){
+    public GestionarAprobacionesService(SolicitudPrestamoRepository solicitud, PrestamoRepository prestamo, IPrestamoService prestamoService){
         _solicitud = solicitud;
         _prestamoService = prestamoService;
     }
@@ -16,9 +16,9 @@ public class GestionarSolicitudService : IGestionarSolicitudService
             Console.WriteLine("Solicitud no encontrada");
             return false;
         }
-        solicitud.Estado = "En Revision";
-        if(_solicitud.Update(solicitud, solicitud.Id)){
-            Console.WriteLine( "Solicitud En Revision");
+        solicitud.Estado = "Aprobada";
+        if(_solicitud.Update(solicitud, solicitud.Id) && _prestamoService.CrearPrestamo(solicitud)){
+            Console.WriteLine( "Solicitud Aprobada");
             return true;
         };
         ;
@@ -33,13 +33,12 @@ public class GestionarSolicitudService : IGestionarSolicitudService
             Console.WriteLine("Solicitud no encontrada");
             return false;
         }
-        solicitud.Estado = "Rechazada";
+        solicitud.Estado = "Pendiente";
         if(_solicitud.Update(solicitud, solicitud.Id)){
-            Console.WriteLine( "Solicitud Rechazada");
+            Console.WriteLine( "Solicitud no Aprobada");
             return true;
         }
         Console.WriteLine("Solicitud no modificada, error en la DB");
         return false;
     }
-
 }

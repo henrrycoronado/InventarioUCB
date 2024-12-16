@@ -6,10 +6,10 @@ namespace InventarioUCB_SPA.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class GestionarSolicitudesController : ControllerBase
+public class GestionarAprobacionesController
 {
-    private readonly IGestionarSolicitudService _service;
-    public GestionarSolicitudesController(IGestionarSolicitudService service)
+    private readonly IGestionarAprobacionesService _service;
+    public GestionarAprobacionesController(IGestionarAprobacionesService service)
     {
         _service = service;
     }
@@ -24,7 +24,6 @@ public class GestionarSolicitudesController : ControllerBase
         return false;
     }
 
-
     [HttpPost("Rechazar")]
     public bool RechazarSolicitud([FromBody] Ids request)
     {
@@ -34,6 +33,4 @@ public class GestionarSolicitudesController : ControllerBase
         }
         return false;
     }
-
-
 }

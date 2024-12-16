@@ -5,6 +5,7 @@ public interface ISolicitudPrestamoService
 {
     bool EnviarSolicitudPrestamo(SolicitudPrestamoModel soli);
     List<Solicitudesprestamo> mostrarSolicitudesPrestamo();
+    List<Solicitudesprestamo> mostrarSolicitudesAceptadas();
     public List<Detallessolicitudprestamo> DetalleSolicitudPrestamo(int IdSolicitud);
     Solicitudesprestamo? VerSolicitud(int IdSolicitud);
     List<Solicitudesprestamo> HistorialSolicitudPrestamo(int IdUsuario);

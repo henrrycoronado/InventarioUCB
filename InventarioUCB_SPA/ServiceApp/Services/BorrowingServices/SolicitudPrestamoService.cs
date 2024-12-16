@@ -36,6 +36,13 @@ public class SolicitudPrestamoService : ISolicitudPrestamoService
         var result = _solicitud.GetPendingRequests();
         return result;
     }
+
+    public List<Solicitudesprestamo> mostrarSolicitudesAceptadas()
+    {
+        var result = _solicitud.GetReviewRequests();
+        return result;
+    }
+    
     public List<Detallessolicitudprestamo> DetalleSolicitudPrestamo(int IdSolicitud)
     {
         var result = _detalle.GetBySolicitudId(IdSolicitud);

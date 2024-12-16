@@ -3,11 +3,11 @@ import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'solicitudesprestamo',
-  templateUrl: './solicitudesprestamo.component.html',
-  styleUrls: ['./solicitudesprestamo.component.css']
+  selector: 'solicitudesaprobadas',
+  templateUrl: './solicitudesaprobadas.component.html',
+  styleUrls: ['./solicitudesaprobadas.component.css']
 })
-export class SolicitudesPrestamoComponent {
+export class SolicitudesAprobadasComponent {
 
   solicitudes: any[] = [];
   cargandoSolicitudes = false;
@@ -49,7 +49,7 @@ export class SolicitudesPrestamoComponent {
     this.cargandoSolicitudes = true;
 
     // 1. Obtener la lista de solicitudes
-    this.http.get<any[]>(`${this.baseUrl}solicitudprestamo/VerSolicitudes`).subscribe(
+    this.http.get<any[]>(`${this.baseUrl}solicitudprestamo/VerSolicitudesAceptadas`).subscribe(
       (solicitudes) => {
         solicitudes.forEach((solicitud) => {
           console.log(solicitud)
@@ -109,14 +109,16 @@ export class SolicitudesPrestamoComponent {
       IdElement2: 1
     };
 
-    this.http.post(this.baseUrl + 'solicitudprestamo/aprobar', request).subscribe(
+    this.http.post(this.baseUrl + 'gestionaraprobaciones/aprobar', request).subscribe(
       () => {
         alert('Solicitud aprobada correctamente.');
         this.obtenerSolicitudes();
         this.cerrarDetalle();
+
       },
       (error) => {
         console.error('Error al aprobar la solicitud:', error);
+        alert('Error en la aprobacion');
       }
     );
   }
@@ -132,7 +134,7 @@ export class SolicitudesPrestamoComponent {
       IdElement2: 1
     };
 
-    this.http.post(this.baseUrl + 'solicitudprestamo/reprobar', request).subscribe(
+    this.http.post(this.baseUrl + 'gestionaraprobaciones/rechazar', request).subscribe(
       () => {
         alert('Solicitud rechazada correctamente.');
         this.obtenerSolicitudes();
@@ -140,6 +142,7 @@ export class SolicitudesPrestamoComponent {
       },
       (error) => {
         console.error('Error al rechazar la solicitud:', error);
+        alert('Error al rechazar la solicitud');
       }
     );
   }

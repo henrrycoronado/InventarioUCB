@@ -15,6 +15,13 @@ public class SolicitudPrestamoRepository : BaseRepository<Solicitudesprestamo>
             .Where(s => s.Estado == "Pendiente")
             .ToList();
     }
+
+    public List<Solicitudesprestamo> GetReviewRequests()
+    {
+        return _context.Solicitudesprestamos
+            .Where(s => s.Estado == "En Revision")
+            .ToList();
+    }
     public List<Solicitudesprestamo> GetByIdUser(int idUser)
     {
         return _context.Solicitudesprestamos

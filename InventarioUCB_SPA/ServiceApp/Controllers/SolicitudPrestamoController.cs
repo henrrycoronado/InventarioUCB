@@ -38,6 +38,12 @@ public class SolicitudPrestamoController : ControllerBase
         return _service.mostrarSolicitudesPrestamo();
     }
 
+    [HttpGet("VerSolicitudesAceptadas")]
+    public IEnumerable<Solicitudesprestamo> MostrarAceptadas()
+    {
+        return _service.mostrarSolicitudesAceptadas();
+    }
+
     [HttpGet("VerDetalleSolicitud/{idSoli}")]
     public IEnumerable<Detallessolicitudprestamo> MostrarDetalle(int idSoli)
     {

@@ -34,6 +34,9 @@ builder.Services.AddScoped<IPrestamoService, PrestamoService>();
 builder.Services.AddScoped<ISolicitudPrestamoService, SolicitudPrestamoService>();
 builder.Services.AddScoped<ICategoriaServices, CategoriaServices>();
 
+builder.Services.AddScoped<IGestionarAprobacionesService, GestionarAprobacionesService>();
+
+
 builder.Services.AddControllersWithViews();
 
 
