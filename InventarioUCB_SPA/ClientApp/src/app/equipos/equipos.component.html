@@ -65,50 +65,52 @@
     <h2>Registrar Nuevo Equipo</h2>
     <form (ngSubmit)="registrarEquipo()">
       <div>
-        <label for="codigoUcb">Código UCB:</label>
-        <input id="codigoUcb" [(ngModel)]="equipoData.CodigoUcb" name="codigoUcb" required />
+        <div>
+          <label for="codigoEquipo">Código de Equipo:</label>
+          <input id="codigoEquipo" [(ngModel)]="equipoData.CodigoEquipo" name="codigoEquipo" required />
+        </div>
+        <div>
+          <label for="codigoUcb">Código UCB:</label>
+          <input id="codigoUcb" [(ngModel)]="equipoData.CodigoUcb" name="codigoUcb" required />
+        </div>
+        <div>
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" [(ngModel)]="equipoData.Descripcion" name="descripcion"></textarea>
+        </div>
+        <div>
+          <label for="direccionEnlace">Dirección de Enlace:</label>
+          <input id="direccionEnlace" [(ngModel)]="equipoData.DireccionEnlace" name="direccionEnlace" required />
+        </div>
+        <div>
+          <label for="estado">Estado:</label>
+          <input id="estado" [(ngModel)]="equipoData.Estado" name="estado" />
+        </div>
+        <div>
+          <label for="estadoEquipo">Estado del Equipo:</label>
+          <input id="estadoEquipo" [(ngModel)]="equipoData.EstadoEquipo" name="estadoEquipo" />
+        </div>
+        <div>
+          <label for="fabricante">Fabricante:</label>
+          <input id="fabricante" [(ngModel)]="equipoData.Fabricante" name="fabricante" required />
+        </div>
+        <div>
+          <label for="idCategoria">Categoría:</label>
+          <input id="idCategoria" [(ngModel)]="equipoData.IdCategoria" name="idCategoria" type="number" required />
+        </div>
+        <div>
+          <label for="nombre">Nombre del Equipo:</label>
+          <input id="nombre" [(ngModel)]="equipoData.Nombre" name="nombre" required />
+        </div>
+        <div>
+          <label for="numeroSerie">Número de Serie:</label>
+          <input id="numeroSerie" [(ngModel)]="equipoData.NumeroSerie" name="numeroSerie" />
+        </div>
+        <div>
+          <label for="ubicacion">Ubicación:</label>
+          <input id="ubicacion" [(ngModel)]="equipoData.Ubicacion" name="ubicacion" required />
+        </div>
+        <button type="submit">Registrar Equipo</button>
       </div>
-      <div>
-        <label for="codigoEquipo">Código de Equipo:</label>
-        <input id="codigoEquipo" [(ngModel)]="equipoData.CodigoEquipo" name="codigoEquipo" required />
-      </div>
-      <div>
-        <label for="numeroSerie">Número de Serie:</label>
-        <input id="numeroSerie" [(ngModel)]="equipoData.NumeroSerie" name="numeroSerie" />
-      </div>
-      <div>
-        <label for="fabricante">Fabricante:</label>
-        <input id="fabricante" [(ngModel)]="equipoData.Fabricante" name="fabricante" required/>
-      </div>
-      <div>
-        <label for="direccionEnlace">Dirección de Enlace:</label>
-        <input id="direccionEnlace" [(ngModel)]="equipoData.DireccionEnlace" name="direccionEnlace" required/>
-      </div>
-      <div>
-        <label for="nombre">Nombre del Equipo:</label>
-        <input id="nombre" [(ngModel)]="equipoData.Nombre" name="nombre" required />
-      </div>
-      <div>
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" [(ngModel)]="equipoData.Descripcion" name="descripcion"></textarea>
-      </div>
-      <div>
-        <label for="idCategoria">Categoría:</label>
-        <input id="idCategoria" [(ngModel)]="equipoData.IdCategoria" name="idCategoria" type="number" required />
-      </div>
-      <div>
-        <label for="ubicacion">Ubicación:</label>
-        <input id="ubicacion" [(ngModel)]="equipoData.Ubicacion" name="ubicacion" required />
-      </div>
-      <div>
-        <label for="estadoEquipo">Estado del Equipo:</label>
-        <input id="estadoEquipo" [(ngModel)]="equipoData.EstadoEquipo" name="estadoEquipo" />
-      </div>
-      <div>
-        <label for="estado">Estado:</label>
-        <input id="estado" [(ngModel)]="equipoData.Estado" name="estado" />
-      </div>
-      <button type="submit">Registrar Equipo</button>
     </form>
   </div>
 </div>
