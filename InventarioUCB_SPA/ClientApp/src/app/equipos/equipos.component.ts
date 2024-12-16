@@ -15,34 +15,36 @@ export class EquiposComponent implements OnInit {
   equipos: any[] = [];
   equipoSeleccionado: any = null; // Equipo actualmente seleccionado para mostrar detalles
   equipoData = { // Datos del nuevo equipo
-    CodigoUcb: '',
     CodigoEquipo: '',
-    NumeroSerie: '',
-    Fabricante: '',
-    DireccionEnlace: '',
-    Nombre: '',
+    CodigoUcb: '',
     Descripcion: '',
-    IdCategoria: 0,
-    Ubicacion: '',
-    EstadoEquipo: '',
+    DireccionEnlace: '',
     Estado: '',
+    EstadoEquipo: '',
+    Fabricante: '',
+    IdCategoria: 0,
+    Nombre: '',
+    NumeroSerie: '',
+    Ubicacion: ''
   };
+  
   mostrarFormulario = false; // Controla la visibilidad del formulario de registro
   modoEdicion = false; // Indica si estamos editando un equipo
 
   camposEquipo = [ // Configuración de los campos del equipo para el formulario dinámico
-    { label: 'Código UCB', key: 'CodigoUcb' },
     { label: 'Código de Equipo', key: 'CodigoEquipo' },
-    { label: 'Número de Serie', key: 'NumeroSerie' },
-    { label: 'Fabricante', key: 'Fabricante' },
-    { label: 'Dirección de Enlace', key: 'DireccionEnlace' },
-    { label: 'Nombre', key: 'Nombre' },
+    { label: 'Código UCB', key: 'CodigoUcb' },
     { label: 'Descripción', key: 'Descripcion' },
-    { label: 'Categoría', key: 'IdCategoria' },
-    { label: 'Ubicación', key: 'Ubicacion' },
-    { label: 'Estado del Equipo', key: 'EstadoEquipo' },
+    { label: 'Dirección de Enlace', key: 'DireccionEnlace' },
     { label: 'Estado', key: 'Estado' },
+    { label: 'Estado del Equipo', key: 'EstadoEquipo' },
+    { label: 'Fabricante', key: 'Fabricante' },
+    { label: 'Categoría', key: 'IdCategoria' },
+    { label: 'Nombre del Equipo', key: 'Nombre' },
+    { label: 'Número de Serie', key: 'NumeroSerie' },
+    { label: 'Ubicación', key: 'Ubicacion' }
   ];
+  
 
   constructor(private http: HttpClient,private router: Router, @Inject('BASE_URL') private baseUrl: string) {}
 
@@ -78,22 +80,22 @@ export class EquiposComponent implements OnInit {
 
     const equipoEntradaUpdate = {
       equipo: {
-        CodigoEquipo: this.equipoSeleccionado.codigoEquipo,
-        CodigoUcb: this.equipoSeleccionado.codigoUcb,
-        Descripcion: this.equipoSeleccionado.descripcion,
-        DireccionEnlace: this.equipoSeleccionado.direccionEnlace,
-        Estado: this.equipoSeleccionado.estado,
-        EstadoEquipo: this.equipoSeleccionado.estadoEquipo,
-        Fabricante: this.equipoSeleccionado.fabricante,
-        IdCategoria: this.equipoSeleccionado.idCategoria,
-        Nombre: this.equipoSeleccionado.nombre,
-        NumeroSerie: this.equipoSeleccionado.numeroSerie,
-        Ubicacion: this.equipoSeleccionado.ubicacion,
+        codigoEquipo: this.equipoSeleccionado.codigoEquipo,
+        codigoUcb: this.equipoSeleccionado.codigoUcb,
+        descripcion: this.equipoSeleccionado.descripcion,
+        direccionEnlace: this.equipoSeleccionado.direccionEnlace,
+        estado: this.equipoSeleccionado.estado,
+        estadoEquipo: this.equipoSeleccionado.estadoEquipo,
+        fabricante: this.equipoSeleccionado.fabricante,
+        idCategoria: this.equipoSeleccionado.idCategoria,
+        nombre: this.equipoSeleccionado.nombre,
+        numeroSerie: this.equipoSeleccionado.numeroSerie,
+        ubicacion: this.equipoSeleccionado.ubicacion,
       },
-      IdAdministrador: this.idAdministrador,
+      idAdministrador: this.idAdministrador,
     };
 
-    this.http.put(this.baseUrl + 'equipo/ActualizarEquipo', equipoEntradaUpdate).subscribe(
+    this.http.post(this.baseUrl + 'equipo/ActualizarEquipo', equipoEntradaUpdate).subscribe(
       () => {
         alert('Equipo actualizado correctamente');
         this.cargarEquipos(); // Recargar la lista de equipos
@@ -144,18 +146,18 @@ export class EquiposComponent implements OnInit {
     );
   }
   resetearFormulario(): void {
-    this.equipoData = {
-      CodigoUcb: '',
+    this.equipoData = { // Datos del nuevo equipo
       CodigoEquipo: '',
-      NumeroSerie: '',
-      Fabricante: '',
-      DireccionEnlace: '',
-      Nombre: '',
+      CodigoUcb: '',
       Descripcion: '',
-      IdCategoria: 0,
-      Ubicacion: '',
-      EstadoEquipo: '',
+      DireccionEnlace: '',
       Estado: '',
+      EstadoEquipo: '',
+      Fabricante: '',
+      IdCategoria: 0,
+      Nombre: '',
+      NumeroSerie: '',
+      Ubicacion: ''
     };
   }
 }

@@ -51,8 +51,8 @@ export class ComponentesComponent {
   }
 
   cargarEquipos(): void {
-    
-    this.http.get<any[]>(this.baseUrl + 'equipo/VerEquipos').subscribe(
+    const estado = 'Disponible'
+    this.http.get<any[]>(this.baseUrl + 'componente/VerComponentes/',).subscribe(
       (data) => {
         this.equipos = data;
       },
