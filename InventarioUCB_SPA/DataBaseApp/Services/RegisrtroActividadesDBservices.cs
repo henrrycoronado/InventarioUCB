@@ -39,10 +39,4 @@ public class RegistroActividadesRepository : BaseRepository<Registrosactividade>
                 .Where( r => r.IdComponente == IdComponente)
                 .ToList();
     }
-    public bool ActividadCorrect(string actividad)
-    {
-        if(actividad == "Crear" || actividad == "Asociar" || actividad == "Mover" || actividad == "Modificar" || actividad == "Eliminar"){
-            return true;
-        }return false;
-    }
 }

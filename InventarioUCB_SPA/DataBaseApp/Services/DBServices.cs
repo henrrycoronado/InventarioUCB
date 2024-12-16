@@ -25,19 +25,34 @@ public class BaseRepository<T> where T : class
     }
 
     // Crear un nuevo registro
-    public void Add(T entity)
+    public bool Add(T entity)
     {
-        _context.Set<T>().Add(entity);
-        _context.SaveChanges();
+        try{
+            _context.Set<T>().Add(entity);
+            _context.SaveChanges();
+            return true;
+        }catch(Exception e){
+            Console.WriteLine(e);
+            return false;
+        };
     }
 
     // Actualizar un registro existente
-    public void Update(T entity, int id)
+    public bool Update(T entity, int id)
     {
-        var existingEntity = GetById(id);
-        if (existingEntity == null){ return ;}
+        try
+        {
+            var existingEntity = GetById(id);
+            if (existingEntity == null){ return false;}
     
-        _context.Entry(existingEntity).CurrentValues.SetValues(entity); // Solo actualiza propiedades
-        _context.SaveChanges();
+            _context.Entry(existingEntity).CurrentValues.SetValues(entity); // Solo actualiza propiedades
+            _context.SaveChanges();
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return false;
+        }
     }
 }

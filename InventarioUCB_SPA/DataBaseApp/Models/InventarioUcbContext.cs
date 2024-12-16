@@ -69,8 +69,6 @@ public partial class InventarioUcbContext : DbContext
 
             entity.ToTable("componentesaccesorios");
 
-            entity.HasIndex(e => e.CodigoComponente, "CODIGO_COMPONENTE").IsUnique();
-
             entity.HasIndex(e => e.CodigoUcb, "CODIGO_UCB").IsUnique();
 
             entity.HasIndex(e => e.IdCategoria, "ID_CATEGORIA");
@@ -80,7 +78,9 @@ public partial class InventarioUcbContext : DbContext
             entity.Property(e => e.Id)
                 .HasColumnType("int(11)")
                 .HasColumnName("ID");
-            entity.Property(e => e.CodigoComponente).HasColumnName("CODIGO_COMPONENTE");
+            entity.Property(e => e.CodigoComponente)
+                .HasMaxLength(255)
+                .HasColumnName("CODIGO_COMPONENTE");
             entity.Property(e => e.CodigoUcb).HasColumnName("CODIGO_UCB");
             entity.Property(e => e.Descripcion)
                 .HasColumnType("text")
@@ -104,7 +104,7 @@ public partial class InventarioUcbContext : DbContext
                 .HasColumnName("NOMBRE");
             entity.Property(e => e.NumeroSerie).HasColumnName("NUMERO_SERIE");
             entity.Property(e => e.Ubicacion)
-                .HasMaxLength(10)
+                .HasMaxLength(255)
                 .HasColumnName("UBICACION");
 
             entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Componentesaccesorios)
@@ -154,8 +154,6 @@ public partial class InventarioUcbContext : DbContext
 
             entity.ToTable("equipos");
 
-            entity.HasIndex(e => e.CodigoEquipo, "CODIGO_EQUIPO").IsUnique();
-
             entity.HasIndex(e => e.CodigoUcb, "CODIGO_UCB").IsUnique();
 
             entity.HasIndex(e => e.IdCategoria, "ID_CATEGORIA");
@@ -165,7 +163,9 @@ public partial class InventarioUcbContext : DbContext
             entity.Property(e => e.Id)
                 .HasColumnType("int(11)")
                 .HasColumnName("ID");
-            entity.Property(e => e.CodigoEquipo).HasColumnName("CODIGO_EQUIPO");
+            entity.Property(e => e.CodigoEquipo)
+                .HasMaxLength(255)
+                .HasColumnName("CODIGO_EQUIPO");
             entity.Property(e => e.CodigoUcb).HasColumnName("CODIGO_UCB");
             entity.Property(e => e.Descripcion)
                 .HasColumnType("text")
@@ -192,7 +192,7 @@ public partial class InventarioUcbContext : DbContext
                 .HasColumnName("NOMBRE");
             entity.Property(e => e.NumeroSerie).HasColumnName("NUMERO_SERIE");
             entity.Property(e => e.Ubicacion)
-                .HasMaxLength(10)
+                .HasMaxLength(255)
                 .HasColumnName("UBICACION");
 
             entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Equipos)

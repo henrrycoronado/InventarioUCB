@@ -8,10 +8,17 @@ public class ComponenteRepository : BaseRepository<Componentesaccesorio>
     public ComponenteRepository(InventarioUcbContext context) : base(context) { }
 
     // Obtener equipos por estado
-    public List<Componentesaccesorio> GetByState(string estado)
+    public List<Componentesaccesorio> GetByStateComponente(string estado)
     {
         return _context.Componentesaccesorios
             .Where(e => e.EstadoComponente == estado)
+            .ToList();
+    }
+
+    public List<Componentesaccesorio> GetByState(string estado)
+    {
+        return _context.Componentesaccesorios
+            .Where(e => e.Estado == estado)
             .ToList();
     }
     // Obtener equipo por código UCB
@@ -20,10 +27,24 @@ public class ComponenteRepository : BaseRepository<Componentesaccesorio>
         return _context.Componentesaccesorios
             .FirstOrDefault(e => e.CodigoUcb == codigoUcb);
     }
-    public Componentesaccesorio? GetByCodigoComponente(string codigoComponent)
+    public List<Componentesaccesorio> GetByCodigoComponente(string codigoComponent)
     {
         return _context.Componentesaccesorios
-            .FirstOrDefault(e => e.CodigoComponente == codigoComponent);
+            .Where(e => e.CodigoComponente == codigoComponent)
+            .ToList();
+    }
+    public List<Componentesaccesorio> GetByFabricante(string Fabricante)
+    {
+        return _context.Componentesaccesorios
+            .Where(e => e.Fabricante == Fabricante)
+            .ToList();
+    }
+
+    public List<Componentesaccesorio> GetByCategoria(int categoriaId)
+    {
+        return _context.Componentesaccesorios
+            .Where(e => e.IdCategoria == categoriaId)
+            .ToList();
     }
     public Componentesaccesorio? GetByNumeroSerie(string numeroSerie)
     {

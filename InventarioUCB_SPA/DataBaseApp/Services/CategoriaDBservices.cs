@@ -19,11 +19,4 @@ public class CategoriaRepository : BaseRepository<Categoria>
     {
         return _context.Set<Categoria>().FirstOrDefault(e => e.Nombre == name);
     }
-
-    public bool AreaCorrect(string area)
-    {
-        if(area == "Aula" || area == "Laboratorio" || area == "Taller"){
-            return true;
-        }return false;
-    }
 }
