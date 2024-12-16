@@ -50,7 +50,7 @@
     
     <!-- Botones de acción -->
     <div>
-      <textarea placeholder="Escribe una justificación..." rows="4"></textarea>
+      <textarea [(ngModel)]="justificacion" placeholder="Escribe una justificación..." rows="4"></textarea>
       <div>
         <button (click)="aprobarSolicitud()">Aprobar</button>
         <button (click)="rechazarSolicitud()">Rechazar</button>

@@ -3,7 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'solicitudesprestamo',
+  selector: 'soli',
   templateUrl: './solicitudesprestamo.component.html',
   styleUrls: ['./solicitudesprestamo.component.css']
 })
@@ -109,7 +109,7 @@ export class SolicitudesPrestamoComponent {
       IdElement2: 1
     };
 
-    this.http.post(this.baseUrl + 'solicitudprestamo/aprobar', request).subscribe(
+    this.http.post(this.baseUrl + 'solicitudprestamo/Aprobar', request).subscribe(
       () => {
         alert('Solicitud aprobada correctamente.');
         this.obtenerSolicitudes();
@@ -132,7 +132,7 @@ export class SolicitudesPrestamoComponent {
       IdElement2: 1
     };
 
-    this.http.post(this.baseUrl + 'solicitudprestamo/reprobar', request).subscribe(
+    this.http.post(this.baseUrl + 'solicitudprestamo/Reprobar', request).subscribe(
       () => {
         alert('Solicitud rechazada correctamente.');
         this.obtenerSolicitudes();

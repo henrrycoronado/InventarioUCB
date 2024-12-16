@@ -94,7 +94,7 @@ import { SolicitudesAprobadasComponent } from './solictudesaprobadas/solicitudes
       { path: 'registro', component: RegistroComponent },
       { path: 'reportes', component: ReportesComponent },
       { path: 'solicitudesprestamo', component: SolicitudesPrestamoComponent }, 
-      { path: 'solicitudesaprobadas', component: SolicitudesAprobadasComponent }, //gestionaraprobaciones
+      { path: 'soli', component: SolicitudesAprobadasComponent }, //gestionaraprobaciones
     ])
   ],
   providers: [],

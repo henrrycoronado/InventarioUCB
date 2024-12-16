@@ -109,7 +109,7 @@ export class SolicitudesAprobadasComponent {
       IdElement2: 1
     };
 
-    this.http.post(this.baseUrl + 'gestionaraprobaciones/aprobar', request).subscribe(
+    this.http.post(this.baseUrl + 'gestionaraprobaciones/Aprobar', request).subscribe(
       () => {
         alert('Solicitud aprobada correctamente.');
         this.obtenerSolicitudes();
@@ -134,7 +134,7 @@ export class SolicitudesAprobadasComponent {
       IdElement2: 1
     };
 
-    this.http.post(this.baseUrl + 'gestionaraprobaciones/rechazar', request).subscribe(
+    this.http.post(this.baseUrl + 'gestionaraprobaciones/Rechazar', request).subscribe(
       () => {
         alert('Solicitud rechazada correctamente.');
         this.obtenerSolicitudes();
