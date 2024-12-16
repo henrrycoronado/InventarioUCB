@@ -6,25 +6,23 @@
       <table>
         <thead>
           <tr>
-            <th>Nombre Equipo</th>
-            <th>Estado Equipo</th>
-            <th>Nombre Usuario</th>
-            <th>Estado Solicitud</th>
+            <th>#</th>
             <th>Fecha Solicitud</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Estado Solicitud</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let solicitud of solicitudesPrestamo">
-            <td>{{ solicitud.IdEquipoNavigation?.Nombre || 'N/A' }}</td>
-            <td>{{ solicitud.IdEquipoNavigation?.estado || 'N/A' }}</td>
-            <td>{{ solicitud.IdSolicitudPrestamoNavigation?.IdUsuarioNavigation?.Nombre || 'N/A' }} 
-                {{ solicitud.IdSolicitudPrestamoNavigation?.IdUsuarioNavigation?.Apellido || '' }}
-            </td>
+          <tr *ngFor="let solicitud of solicitudes">
+            <td>{{ solicitud.id || 'N/A' }}</td>
+            <td>{{ solicitud.fechaSolicitud | date: 'shortDate' }}</td>
+            <td>{{ solicitud.fechaInicioPrestamo | date: 'shortDate' }}</td>
+            <td>{{ solicitud.fechaFinPrestamo | date: 'shortDate' }}</td>
             <td>{{ solicitud.estado || 'N/A' }}</td>
-            <td>{{ (solicitud.fechaSolicitud || 'N/A') | date: 'shortDate' }}</td>
             <td>
-              <button (click)="verDetallesSolicitud(solicitud)">+</button>
+              <button (click)="verDetallesSolicitud(solicitud)">Ver Detalles</button>
             </td>
           </tr>
         </tbody>
@@ -35,17 +33,72 @@
   <!-- Detalle de la solicitud -->
   <div class="detalle-solicitud" *ngIf="solicitudSeleccionada">
     <h2>Detalles de la Solicitud</h2>
+    <div *ngIf="solicitudSeleccionada.equipos && solicitudSeleccionada.equipos.length">
+      <h3>Equipos Solicitados:</h3>
+      <ul>
+        <li *ngFor="let equipo of solicitudSeleccionada.equipos">
+          <strong>{{ equipo.nombre }}</strong> - {{ equipo.descripcion || 'N/A' }}
+        </li>
+      </ul>
+    </div>
     <div>
-      <p><strong>Nombre del Equipo:</strong> {{ solicitudSeleccionada.IdEquipoNavigation?.Nombre || 'N/A' }}</p>
-      <p><strong>Estado del Equipo:</strong> {{ solicitudSeleccionada.IdEquipoNavigation?.EstadoEquipo || 'N/A' }}</p>
-      <p><strong>Nombre del Usuario:</strong> {{ solicitudSeleccionada.IdSolicitudPrestamoNavigation?.IdUsuarioNavigation?.Nombre || 'N/A' }} 
-          {{ solicitudSeleccionada.IdSolicitudPrestamoNavigation?.IdUsuarioNavigation?.Apellido || '' }}</p>
       <p><strong>Estado de la Solicitud:</strong> {{ solicitudSeleccionada.estado || 'N/A' }}</p>
       <p><strong>Fecha de la Solicitud:</strong> {{ (solicitudSeleccionada.fechaSolicitud || 'N/A') | date: 'shortDate' }}</p>
+      <p><strong>Fecha de Inicio de Préstamo:</strong> {{ (solicitudSeleccionada.fechaInicioPrestamo || 'N/A') | date: 'shortDate' }}</p>
+      <p><strong>Fecha de Fin de Préstamo:</strong> {{ (solicitudSeleccionada.fechaFinPrestamo || 'N/A') | date: 'shortDate' }}</p>
     </div>
-    <textarea [(ngModel)]="justificacion" placeholder="Escribe una justificación..." rows="4"></textarea>
-    <button (click)="aprobarSolicitud()">Aprobar</button>
-    <button (click)="rechazarSolicitud()">Rechazar</button>
-    <button (click)="cerrarDetalle()">Cancelar</button>
+    
+    <!-- Botones de acción -->
+    <div>
+      <textarea [(ngModel)]="justificacion" placeholder="Escribe una justificación..." rows="4"></textarea>
+      <div>
+        <button (click)="aprobarSolicitud()">Aprobar</button>
+        <button (click)="rechazarSolicitud()">Rechazar</button>
+        <button (click)="cerrarDetalle()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón para mostrar el formulario de nueva solicitud -->
+  <div class="registrar-solicitud-boton">
+    <button (click)="mostrarFormulario = !mostrarFormulario">
+      {{ mostrarFormulario ? 'Cancelar Registro' : 'Registrar Nueva Solicitud' }}
+    </button>
+  </div>
+
+  <!-- Formulario para registrar nueva solicitud -->
+  <div class="registrar-solicitud" *ngIf="mostrarFormulario">
+    <h2>Registrar Nueva Solicitud de Préstamo</h2>
+    <form (ngSubmit)="registrarSolicitud()">
+      <!-- Fecha Solicitud (automática, fecha actual) -->
+      <div>
+        <label for="fechaSolicitud">Fecha Solicitud:</label>
+        <input type="date" id="fechaSolicitud" [value]="fechaSolicitud" name="fechaSolicitud" readonly />
+      </div>
+
+      <!-- Fechas de Préstamo -->
+      <div>
+        <label for="fechaInicio">Fecha Inicio Préstamo:</label>
+        <input type="date" id="fechaInicio" [(ngModel)]="solicitud.FechaInicioPrestamo" name="fechaInicio" required />
+      </div>
+      
+      <div>
+        <label for="fechaFin">Fecha Fin Préstamo:</label>
+        <input type="date" id="fechaFin" [(ngModel)]="solicitud.FechaFinPrestamo" name="fechaFin" required />
+      </div>
+
+      <!-- Selección de Equipos (multiselección) -->
+      <div>
+        <label for="equipos">Seleccionar Equipos:</label>
+        <select multiple id="equipos" [(ngModel)]="equiposSeleccionados" name="equipos" required>
+          <option *ngFor="let equipo of equiposDisponibles" [value]="equipo.id">{{ equipo.nombre }}</option>
+        </select>
+      </div>
+
+      <!-- Botón para Enviar Solicitud -->
+      <button type="submit" [disabled]="!solicitud.FechaInicioPrestamo || !solicitud.FechaFinPrestamo || equiposSeleccionados.length === 0">
+        Registrar Solicitud
+      </button>
+    </form>
   </div>
 </div>

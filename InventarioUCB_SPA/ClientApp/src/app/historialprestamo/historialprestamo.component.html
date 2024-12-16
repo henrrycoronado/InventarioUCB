@@ -1,3 +1,36 @@
-<body>
-    SE MUESTRAN TODOS LOS PRESTAMOS YA PROCESADOS (NI PENDIENTES)
-</body>
+<div class="contenedor">
+    <h2>Historial de Préstamos</h2>
+  
+    <!-- Mostrar indicador de carga -->
+    <div *ngIf="cargando" class="loading">
+      Cargando historial de préstamos...
+    </div>
+  
+    <!-- Tabla de historial -->
+    <div *ngIf="!cargando">
+      <table>
+        <thead>
+          <tr>
+            <th>ID Préstamo</th>
+            <th>Fecha Solicitud</th>
+            <th>Fecha Devolución</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prestamo of historialPrestamos">
+            <td>{{ prestamo.idPrestamo }}</td>
+            <td>{{ prestamo.fechaSolicitud | date: 'shortDate' }}</td>
+            <td>{{ prestamo.fechaDevolucion | date: 'shortDate' }}</td>
+            <td>{{ prestamo.estadoPrestamo }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Mostrar mensaje si no hay datos -->
+      <div *ngIf="historialPrestamos.length === 0" class="mensaje">
+        No hay préstamos registrados.
+      </div>
+    </div>
+  </div>
+  

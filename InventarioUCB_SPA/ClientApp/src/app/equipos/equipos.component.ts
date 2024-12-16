@@ -121,7 +121,8 @@ export class EquiposComponent implements OnInit {
 
   eliminarEquipo(): void {
     if (confirm('¿Estás seguro de que deseas eliminar este equipo?')) {
-      const codigo = {codigoequipo:0, IdAdministrador:1};
+      const codigo = {equipo:this.equipoSeleccionado, idAdministrador:1};
+      console.log(codigo);
       this.http.post(this.baseUrl + 'equipo/eliminarEquipo' , codigo).subscribe(
         () => {
           alert('Equipo eliminado correctamente');

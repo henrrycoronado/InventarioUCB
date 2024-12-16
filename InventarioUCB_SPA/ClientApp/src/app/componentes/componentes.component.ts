@@ -52,7 +52,7 @@ export class ComponentesComponent {
 
   cargarEquipos(): void {
     const estado = 'Disponible'
-    this.http.get<any[]>(this.baseUrl + 'componente/verComponentes/{estado}').subscribe(
+    this.http.get<any[]>(`${this.baseUrl}componente/verComponentes/${estado}`).subscribe(
       (data) => {
         this.equipos = data;
       },
@@ -93,7 +93,7 @@ export class ComponentesComponent {
     };
 
     
-    this.http.put(`this.baseUrl + 'usuario/'${this.equipoSeleccionado.id}`, equipoEntradaUpdate).subscribe(
+    this.http.post(`${this.baseUrl}componente/ActualizarComponente/${this.equipoSeleccionado.id}`, equipoEntradaUpdate).subscribe(
       () => {
         alert('Equipo actualizado correctamente');
         this.cargarEquipos(); // Recargar la lista de equipos
@@ -108,7 +108,8 @@ export class ComponentesComponent {
 
   eliminarEquipo(): void {
     if (confirm('¿Estás seguro de que deseas eliminar este equipo?')) {
-      const codigo = {codigoequipo:this.codigoequipo, IdAdministrador:1};
+      const codigo = {codigoequipo:this.equipoSeleccionado, IdAdministrador:1};
+      console.log(codigo);
       this.http.post(this.baseUrl + 'equipo/eliminarEquipo' , codigo).subscribe(
         () => {
           alert('Equipo eliminado correctamente');

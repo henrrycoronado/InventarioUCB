@@ -43,6 +43,7 @@ public class SolicitudPrestamoController : ControllerBase
     {
         return _service.DetalleSolicitudPrestamo(idSoli);
     }
+    
     [HttpGet("VerSolicitud/{idSoli}")]
     public Solicitudesprestamo? MostrarSoli(int idSoli)
     {

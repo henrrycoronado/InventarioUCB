@@ -8,7 +8,7 @@ const PROXY_CONFIG = [
     context: [
       "/gestionarsolicitudes",
       "/solicitudprestamo",
-      "prestamo",
+      "/Prestamo",
       "/categoria",
       "/componente",
       "/equipo",
