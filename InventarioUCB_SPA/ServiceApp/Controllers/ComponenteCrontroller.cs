@@ -22,7 +22,7 @@ public class ComponenteController : ControllerBase
     }
 
     [HttpGet("VerDetalleComponente/{CodigoComponente}")]
-    public Componentesaccesorio VerDetalle(int IdComponente)
+    public Componentesaccesorio? VerDetalle(int IdComponente)
     {
         return _service.DetalleComponente(IdComponente);
     }

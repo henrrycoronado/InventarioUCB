@@ -15,55 +15,6 @@ public class ValidacionesService
         }
         return true;
     }
-    public EquipoModel convertirEquipoModel(Equipo equipo){
-        if(equipo == null){
-            return new EquipoModel();
-        }
-        var modelo = new EquipoModel{
-            CodigoEquipo = equipo.CodigoEquipo,
-            CodigoUcb = equipo.CodigoUcb,
-            NumeroSerie = equipo.NumeroSerie,
-            Fabricante = equipo.Fabricante,
-            DireccionEnlace = equipo.DireccionEnlace,
-            Nombre = equipo.Nombre,
-            Descripcion = equipo.Descripcion,
-            IdCategoria = equipo.IdCategoria,
-            Ubicacion = equipo.Ubicacion,
-            EstadoEquipo = equipo.EstadoEquipo,
-            Estado = equipo.Estado
-        };
-        return modelo;
-    }
-
-    public ComponenteModel convertirComponenteModel(Componentesaccesorio componente){
-        if(componente == null){
-            return new ComponenteModel();
-        }
-        var modelo = new ComponenteModel{
-            CodigoComponente = componente.CodigoComponente,
-            CodigoUcb = componente.CodigoUcb,
-            NumeroSerie = componente.NumeroSerie,
-            Fabricante = componente.Fabricante,
-            Nombre =  componente.Nombre,
-            Descripcion = componente.Descripcion,
-            IdCategoria = componente.IdCategoria,
-            Ubicacion = componente.Ubicacion,
-            EstadoComponente = componente.EstadoComponente,
-            Estado = componente.Estado
-        };
-        return modelo;
-    }
-    public PrestamoModel convertirPrestamoModel(Prestamo prestamo){
-        if(prestamo == null){
-            return new PrestamoModel();
-        }
-        var modelo = new PrestamoModel{
-            IdSolicitudPrestamo = prestamo.IdSolicitudPrestamo,
-            FechaDevolucion = prestamo.FechaDevolucion,
-            Estado = prestamo.Estado
-        };
-        return modelo;
-    }    
     public SolicitudPrestamoModel convertirSolicitudModel(Solicitudesprestamo solicitud){
         if(solicitud == null){
             return new SolicitudPrestamoModel();

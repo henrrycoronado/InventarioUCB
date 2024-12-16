@@ -21,6 +21,9 @@ public class PrestamoController : ControllerBase
     public (Prestamo?, Solicitudesprestamo?) DetallePrestamo(int idPrestamo)
     {
         var prestamo = _servicePrestamo.DetallePrestamo(idPrestamo);
+        if(prestamo == null){
+            return (null, null);
+        }
         var soli = _serviceSoli.VerSolicitud(prestamo.Id);
         return (prestamo, soli);
     }
