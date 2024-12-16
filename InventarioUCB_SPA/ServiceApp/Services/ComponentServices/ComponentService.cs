@@ -14,9 +14,7 @@ public class ComponenteService: IComponentService
     }
     public string RegistrarComponente(ComponenteModelNuevo componente, int idAdmin)
     {
-        if(_componente.GetByCodigoComponente(componente.CodigoComponente) != null){
-            return "Codigo componente ya existente";
-        }else if(componente.CodigoUcb != null && _componente.GetByCodigoUcb(componente.CodigoUcb) != null){
+        if(componente.CodigoUcb != null && _componente.GetByCodigoUcb(componente.CodigoUcb) != null){
             return "CodigoUCB ya existente";
         }else if(componente.NumeroSerie != null && _componente.GetByNumeroSerie(componente.NumeroSerie) != null){
             return "Numero de serie ya existente";
@@ -36,31 +34,24 @@ public class ComponenteService: IComponentService
             EstadoComponente = componente.EstadoComponente,
             Estado = "Disponible"
         };
-        _componente.Add(ComponenteNuevo);
-        if(ComprobarComponente(componente.CodigoComponente)){
+        if(_componente.Add(ComponenteNuevo)){
             return "Creacion de componente exitosa";
         }
         return "Solicitud no aceptada, revise su entrada por favor";
     }
-    public bool ComprobarComponente(string codigoComponent){
-        if(_componente.GetByCodigoComponente(codigoComponent) == null){
-            return false;
-        }
-        return true;
-    }
     
-    public ComponenteModel DetalleComponente(string CodigoComponente)
+    public Componentesaccesorio? DetalleComponente(int IdComponente)
     {
-        var componente = _componente.GetByCodigoComponente(CodigoComponente);
+        var componente = _componente.GetById(IdComponente);
         if(componente != null){
-            return _validaciones.convertirComponenteModel(componente);
+            return componente;
         }
-        return new ComponenteModel();
+        return null;
     }
-    public string ActualizarComponente(ComponenteModel componente, int IdAdmin)
+    public string ActualizarComponente(Componentesaccesorio componente, int IdAdmin)
     {
         
-        var exist = _componente.GetByCodigoComponente(componente.CodigoComponente);
+        var exist = _componente.GetById(componente.Id);
         if(exist == null){
             return "Componente no reconocido, codigo de componente inexistente";
         }
@@ -71,35 +62,34 @@ public class ComponenteService: IComponentService
         exist.IdCategoria = componente.IdCategoria;
         exist.Ubicacion = componente.Ubicacion;
         exist.Estado = componente.Estado;
-        _componente.Update(exist, exist.Id);
-        return "Revisar Cambios";
+        if(_componente.Update(exist, exist.Id)){
+            return "Actualizacion completada, revise cambios";
+        }
+        return "Actualizacion no completada, error en la DB";
     }
-    public string EliminarComponente(string CodigoComponente, int IdAdmin)
+    public string EliminarComponente(int IdComponente, int IdAdmin)
     {
-        var exist = _componente.GetByCodigoComponente(CodigoComponente);
+        var exist = _componente.GetById(IdComponente);
         if(exist == null){
-            return "Componente no reconocido, codigo de componente inexistente";
+            return "Componente no reconocido, Id de componente inexistente";
         }
         exist.Estado = "Eliminado";
-        _componente.Update(exist, exist.Id);
-        return "Revisar Cambios de eliminacion";
+        if(_componente.Update(exist, exist.Id)){
+            return "Eliminacion completa, Revisar Cambios de eliminacion";
+        }
+        return "Eliminacion no completa, error en la DB";
     }
     
-    public List<ComponenteModel> MostrarComponentes(string estado = "Disponible")
+    public List<Componentesaccesorio> MostrarComponentes(string estado = "Disponible")
     {
         var result = _componente.GetByState(estado);
-        List<ComponenteModel> lista = new List<ComponenteModel>();
-        foreach (var equipo in result)
-        {
-            lista.Add(_validaciones.convertirComponenteModel(equipo));
-        }
-        return lista;
+        return result;
     }
-    public string cambiar_estado_componente(string CodigoComponente, int IdAdmin, bool mantenimiento = false)
+    public string cambiar_estado_componente(int IdComponente, int IdAdmin, bool mantenimiento = false)
     {
-        var exist = _componente.GetByCodigoComponente(CodigoComponente);
+        var exist = _componente.GetById(IdComponente);
         if(exist == null){
-            return "Componente no reconocido, codigo de Componente inexistente";
+            return "Componente no reconocido, ID de Componente inexistente";
         }
 
         if(mantenimiento){
@@ -111,7 +101,9 @@ public class ComponenteService: IComponentService
                 exist.Estado = "Disponible";
             }
         }
-        _componente.Update(exist, exist.Id);
-        return "Revisar cambios";
+        if(_componente.Update(exist, exist.Id)){
+            return "Cambio completado, revisar cambios";
+        }
+        return "Cambios no completados, error en la DB";
     }
 }

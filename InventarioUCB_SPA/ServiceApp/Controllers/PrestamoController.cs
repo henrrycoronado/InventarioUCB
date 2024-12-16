@@ -9,33 +9,31 @@ namespace InventarioUCB_SPA.Controllers;
 [Route("[controller]")]
 public class PrestamoController : ControllerBase
 {
-    private readonly IPrestamoService _service;
-    public PrestamoController(IPrestamoService service)
+    private readonly IPrestamoService _servicePrestamo;
+    private readonly ISolicitudPrestamoService _serviceSoli;
+    public PrestamoController(IPrestamoService servicePrestamo, ISolicitudPrestamoService serviceSoli)
     {
-        _service = service;
-    }
-
-    [HttpPost("CrearPrestamo")]
-    public string Crear([FromBody] Solicitudesprestamo request)
-    {
-        return _service.CrearPrestamo(request);
+        _servicePrestamo = servicePrestamo;
+        _serviceSoli = serviceSoli;
     }
 
     [HttpGet("DetallePrestamo/{idPrestamo}")]
-    public PrestamoModel DetallePrestamo(int idPrestamo)
+    public (Prestamo?, Solicitudesprestamo?) DetallePrestamo(int idPrestamo)
     {
-        return _service.DetallePrestamo(idPrestamo);
+        var prestamo = _servicePrestamo.DetallePrestamo(idPrestamo);
+        var soli = _serviceSoli.VerSolicitud(prestamo.Id);
+        return (prestamo, soli);
     }
 
     [HttpGet("HistorialPrestamo/{idUser}")]
-    public List<PrestamoModel> HisrorialPrestamo(int idUser)
+    public List<Prestamo> HisrorialPrestamo(int idUser)
     {
-        return _service.HistorialPrestamo(idUser);
+        return _servicePrestamo.HistorialPrestamo(idUser);
     }
 
     [HttpGet("DevolverPrestamo/{idPrestamo}")]
     public string Devolucion(int idPrestamo)
     {
-        return _service.DevolverPrestamo(idPrestamo);
+        return _servicePrestamo.DevolverPrestamo(idPrestamo);
     }
 }

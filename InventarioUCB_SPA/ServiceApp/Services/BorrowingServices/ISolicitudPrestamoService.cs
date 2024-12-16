@@ -4,8 +4,10 @@ using ServicesApp.Models;
 public interface ISolicitudPrestamoService
 {
     bool EnviarSolicitudPrestamo(SolicitudPrestamoModel soli);
-    List<SolicitudPrestamoModel> mostrarSolicitudesPrestamo();
+    List<Solicitudesprestamo> mostrarSolicitudesPrestamo();
     public List<Detallessolicitudprestamo> DetalleSolicitudPrestamo(int IdSolicitud);
-    SolicitudPrestamoModel VerSolicitud(int IdSolicitud);
-    List<SolicitudPrestamoModel> HistorialSolicitudPrestamo(int IdUsuario);
+    Solicitudesprestamo? VerSolicitud(int IdSolicitud);
+    List<Solicitudesprestamo> HistorialSolicitudPrestamo(int IdUsuario);
+    string AddDetalle(int idSolicitud, int IdEquipo);
+    string RemoveDetalle(int IdSolicitud, int IdEquipo);
 }

@@ -17,12 +17,12 @@ public class GestionarSolicitudesController : ControllerBase
     [HttpPost("Aprobar")]
     public string AprobarSoicitud([FromBody] Ids request)
     {
-        return _service.AprobarSolicitud(request.IdElement, request.IdAdministrador);
+        return _service.AprobarSolicitud(request.IdElement1, request.IdElement2);
     }
 
     [HttpPost("Rechazar")]
     public string RechazarSolicitud([FromBody] Ids request)
     {
-        return _service.RechazarSolicitud(request.IdElement, request.IdAdministrador);
+        return _service.RechazarSolicitud(request.IdElement1, request.IdElement2);
     }
 }

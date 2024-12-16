@@ -54,9 +54,12 @@ public class UsuarioRepository : BaseRepository<Usuario>
         }
     }
 
-    public void CrearUser(Usuario user){
+    public bool CrearUser(Usuario user){
         user.Contraseña = HashPassword(user.Contraseña);
-        Add(user);
+        if(Add(user)){
+            return true;
+        }
+        return false;
     } 
 
 }

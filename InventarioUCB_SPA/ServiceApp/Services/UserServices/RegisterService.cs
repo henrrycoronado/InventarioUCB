@@ -31,9 +31,8 @@ public class RegisterService : IRegisterService
             Telefono = user.Telefono,
             Rol = user.Rol
         };
-        _user.CrearUser(usuarioNuevo);
-        if(ComprobarUsuario(user.Correo, user.Contraseña)){
-            return "Creacion de perfil exitosa";
+        if(_user.CrearUser(usuarioNuevo)){
+            return "Creacion de perfil exitosa, intenta con tus credenciales ingresadas";
         }
         return "Solicitud no aceptada, revise su entrada por favor";
     }

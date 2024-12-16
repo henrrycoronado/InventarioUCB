@@ -15,14 +15,25 @@ public class SolicitudPrestamoController : ControllerBase
         _service = service;
     }
 
-    [HttpPost("EnviarSolicitu")]
+    [HttpPost("EnviarSolicitud")]
     public bool Enviar([FromBody] SolicitudPrestamoModel request)
     {
         return _service.EnviarSolicitudPrestamo(request);
     }
 
+    [HttpPost("AgregarDetalle")]
+    public string AgregarDetalle([FromBody] Ids request)
+    {
+        return _service.AddDetalle(request.IdElement1, request.IdElement2);
+    }
+    [HttpPost("QuitarDetalle")]
+    public string QuitarDetalle([FromBody] Ids request)
+    {
+        return _service.RemoveDetalle(request.IdElement1, request.IdElement2);
+    }
+
     [HttpGet("VerSoicitudes")]
-    public IEnumerable<SolicitudPrestamoModel> Mostrar()
+    public IEnumerable<Solicitudesprestamo> Mostrar()
     {
         return _service.mostrarSolicitudesPrestamo();
     }
@@ -33,13 +44,13 @@ public class SolicitudPrestamoController : ControllerBase
         return _service.DetalleSolicitudPrestamo(idSoli);
     }
     [HttpGet("VerSolicitud/{idSoli}")]
-    public SolicitudPrestamoModel MostrarSoli(int idSoli)
+    public Solicitudesprestamo? MostrarSoli(int idSoli)
     {
         return _service.VerSolicitud(idSoli);
     }
 
     [HttpGet("VerHistorialSolicitud/{idUser}")]
-    public IEnumerable<SolicitudPrestamoModel> HistorialSoli(int idUser)
+    public IEnumerable<Solicitudesprestamo> HistorialSoli(int idUser)
     {
         return _service.HistorialSolicitudPrestamo(idUser);
     }

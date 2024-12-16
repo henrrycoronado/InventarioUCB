@@ -4,6 +4,8 @@ using ServicesApp.Models;
 namespace ServicesApp.Models.Services;
 
 public interface ICategoriaServices {
-    string CrearCategoria(CategoriaModel categoria);
+    string CrearCategoria(Categoria categoria);
+    List<Categoria> ObtenerCategorias();
+    List<Categoria> ObtenerCategoriasArea(string area);
     
 }

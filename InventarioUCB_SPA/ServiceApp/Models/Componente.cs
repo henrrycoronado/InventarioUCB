@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using InventarioUCB_SPA.DataBaseApp.Models;
 using InventarioUCB_SPA.DataBaseApp.Models.Services;
 namespace ServicesApp.Models;
 public class ComponenteModelNuevo
@@ -21,9 +22,6 @@ public class ComponenteModelNuevo
 
     public string? EstadoComponente { get; set; }
 }
-public class ComponenteModel: ComponenteModelNuevo{
-    public string? Estado { get; set; }
-}
 
 
 public class ComponenteEntrada{
@@ -32,12 +30,7 @@ public class ComponenteEntrada{
 }
 
 public class ComponenteUpdate{
-    public ComponenteModel componente { get; set; } = null!;
-    public int IdAdministrador { get; set; }
-}
-
-public class ComponenteDelete {
-    public string CodigoComponente { get; set; } = null!;
+    public Componentesaccesorio componente { get; set; } = null!;
     public int IdAdministrador { get; set; }
 }
 

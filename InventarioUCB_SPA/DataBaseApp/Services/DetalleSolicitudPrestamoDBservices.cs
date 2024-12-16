@@ -20,10 +20,12 @@ public class DetalleSolicitudPrestamoRepository : BaseRepository<Detallessolicit
             var ds = GetById(idDetalleSoli);
             if(ds == null){return false;}
             if(ds.Estado == "Seleccionado"){
-                ds.Estado = "Quitado";
-                if(Update(ds, ds.Id)){
-                    return true;
-                }
+                ds.Estado = "Deseleccionado";
+            }else{
+                ds.Estado = "Seleccionado";
+            }
+            if(Update(ds, ds.Id)){
+                return true;
             }
             return false;
         }catch(Exception e){
@@ -31,4 +33,17 @@ public class DetalleSolicitudPrestamoRepository : BaseRepository<Detallessolicit
             return false;
         }
     }
+
+    public Detallessolicitudprestamo? ConeccionActiva(int Id_Solicitud, int Id_equipo){
+        return _context.Detallessolicitudprestamos
+                .Where( e => e.IdSolicitudPrestamo == Id_Solicitud && e.IdEquipo == Id_equipo && e.Estado == "Seleccionado")
+                .FirstOrDefault();
+    }
+    public Detallessolicitudprestamo? ExistioConeccion(int Id_Solicitud, int Id_equipo){
+        return _context.Detallessolicitudprestamos
+                .Where( e => e.IdSolicitudPrestamo == Id_Solicitud && e.IdEquipo == Id_equipo && e.Estado == "Deseleccionado")
+                .FirstOrDefault();
+    }
+
+    
 }

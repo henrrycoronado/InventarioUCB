@@ -16,9 +16,11 @@ public class GestionarSolicitudService : IGestionarSolicitudService
             return "Solicitud no encontrada";
         }
         solicitud.Estado = "Aprobada";
-        _solicitud.Update(solicitud, solicitud.Id);
-        _prestamoService.CrearPrestamo(solicitud);
-        return "Solicitud Aprobada";
+        if(_solicitud.Update(solicitud, solicitud.Id) && _prestamoService.CrearPrestamo(solicitud)){
+            return "Solicitud Aprobada";
+        };
+        ;
+        return "Solicitud no modificada, error en la DB";
     }
 
     public string RechazarSolicitud(int Idsolicitud, int IdAdmin)
@@ -28,7 +30,9 @@ public class GestionarSolicitudService : IGestionarSolicitudService
             return "Solicitud no encontrada";
         }
         solicitud.Estado = "Rechazada";
-        _solicitud.Update(solicitud, solicitud.Id);
-        return "Solicitud Rechazada";
+        if(_solicitud.Update(solicitud, solicitud.Id)){
+            return "Solicitud Rechazada con exito";
+        }
+        return "Solicitud no modificada, error en la DB";
     }
 }

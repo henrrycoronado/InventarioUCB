@@ -10,32 +10,29 @@ public class PrestamoService : IPrestamoService
         _prestamo = prestamo;
         _validaciones = validaciones;
     }
-    public string CrearPrestamo(Solicitudesprestamo solicitud) 
+    public bool CrearPrestamo(Solicitudesprestamo solicitud) 
     {
         var prestamoNuevo = new Prestamo{
             IdSolicitudPrestamo = solicitud.Id,
             FechaDevolucion = solicitud.FechaFinPrestamo,
             Estado = "Activo"
         };
-        _prestamo.Add(prestamoNuevo);
-        return "Prestamo Creado";
+        if(_prestamo.Add(prestamoNuevo)){
+            return true;
+        }
+        return false;
     }
-    public PrestamoModel DetallePrestamo(int idPrestamo)
+    public Prestamo? DetallePrestamo(int idPrestamo)
     {
-        var prestamoModel = _prestamo.GetById(idPrestamo);
-        if (prestamoModel == null)
-            return new PrestamoModel();
-        return _validaciones.convertirPrestamoModel(prestamoModel);
+        var prestamo = _prestamo.GetById(idPrestamo);
+        if (prestamo == null)
+            return null;
+        return prestamo;
     }
-    public List<PrestamoModel> HistorialPrestamo(int idUsuario)
+    public List<Prestamo> HistorialPrestamo(int idUsuario)
     {
         var result = _prestamo.Historial(idUsuario);
-        var lista = new List<PrestamoModel>();
-        foreach (var prest in result)
-        {
-            lista.Add(_validaciones.convertirPrestamoModel(prest));
-        }
-        return lista;
+        return result;
     }
     public string DevolverPrestamo(int IdPrestamo)
     {
@@ -49,7 +46,10 @@ public class PrestamoService : IPrestamoService
         else{
             prestamo.Estado = "Devuelto";
         }
-        _prestamo.Update(prestamo, prestamo.Id);
-        return "Devolucion Exitosa";
+
+        if(_prestamo.Update(prestamo, prestamo.Id)){
+            return "Devolucion Exitosa";
+        }
+        return "Devolucion no completada, error en la DB";
     }
 }

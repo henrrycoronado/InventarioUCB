@@ -16,12 +16,9 @@ public class LoginServices : ILoginService
     }
     public int? Logear(string correo, string password)
     {
-        Console.WriteLine("se llego al metodo");
         if(ComprobarCorreo(correo)){
-            Console.WriteLine("se llego al metodo  y se retorna lago");
             return _user.GetIdByLog(correo, password);
         }
-        Console.WriteLine("se llego al metodo y retorna null");
         return null;
     }
 }

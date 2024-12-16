@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServicesApp.Models.Services;
 using ServicesApp.Models;
+using InventarioUCB_SPA.DataBaseApp.Models;
 
 namespace InventarioUCB_SPA.Controllers;
 
@@ -15,9 +16,20 @@ public class CategoriaController : ControllerBase
     }
 
     [HttpPost("CrearCategoria")]
-    public string Crear([FromBody] CategoriaModel request)
+    public string Crear([FromBody] Categoria request)
     {
         return _service.CrearCategoria(request);
+    }
+
+    [HttpGet("VerCategorias")]
+    public IEnumerable<Categoria> Ver()
+    {
+        return _service.ObtenerCategorias();
+    }
+    [HttpGet("VerCategoriasAreas/{area}")]
+    public IEnumerable<Categoria> VerAreas(string area)
+    {
+        return _service.ObtenerCategoriasArea(area);
     }
 
 }

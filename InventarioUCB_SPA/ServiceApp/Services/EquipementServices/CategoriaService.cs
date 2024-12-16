@@ -8,7 +8,7 @@ public class CategoriaServices : ICategoriaServices
     public CategoriaServices(CategoriaRepository cate){
         _cate = cate;
     }
-    public string CrearCategoria(CategoriaModel categoria)
+    public string CrearCategoria(Categoria categoria)
     {
         var result = _cate.GetByName(categoria.Nombre);
         if(result != null){
@@ -18,7 +18,17 @@ public class CategoriaServices : ICategoriaServices
             Nombre = categoria.Nombre,
             Area = categoria.Area
         };
-        _cate.Add(modelo);
-        return "categoria creada";
+        if(_cate.Add(modelo)){
+            return "categoria creada";
+        }
+        
+        return "Error al crear la categoria en la DB";
     }
+    public List<Categoria> ObtenerCategorias(){
+        return _cate.GetAll();
+    }
+
+    public List<Categoria> ObtenerCategoriasArea(string area){
+        return _cate.GetByArea(area);
+    }    
 }

@@ -15,6 +15,14 @@ public class SolicitudPrestamoModel
 
 
 public class Ids{
-    public int IdAdministrador { get; set; }
-    public int IdElement { get; set; }
+    public int IdElement1 { get; set; }
+    public int IdElement2 { get; set; }
+}
+
+public class cambiarEstadoEntrada: Ids{
+    public bool Mantenimiento { get; set; }
+}
+
+public class Ids2: Ids{
+    public int IdElement3 { get; set; }
 }

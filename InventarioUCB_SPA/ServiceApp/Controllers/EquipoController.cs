@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServicesApp.Models.Services;
 using ServicesApp.Models;
+using InventarioUCB_SPA.DataBaseApp.Models;
 
 namespace InventarioUCB_SPA.Controllers;
 
@@ -20,26 +21,26 @@ public class EquipoController : ControllerBase
         return _service.RegistrarEquipo(entrada.equipo, entrada.IdAdministrador );
     }
 
-    [HttpGet("VerDetalleEquipo/{CodigoEquipo}")]
-    public EquipoModel VerDetalle(string CodigoEquipo)
+    [HttpGet("VerDetalleEquipo/{IdEquipo}")]
+    public Equipo? VerDetalle(int IdEquipo)
     {
-        return _service.DetalleEquipo(CodigoEquipo);
+        return _service.DetalleEquipo(IdEquipo);
     }
 
     [HttpPost("ActualizarEquipo")]
-    public string Actualizar([FromBody] EquipoEntradaUpdate entrada )
+    public string Actualizar([FromBody] EquipoUpdate entrada )
     {
         return _service.ActualizarEquipo(entrada.equipo, entrada.IdAdministrador);
     }
 
     [HttpPost("EliminarEquipo")]
-    public string Eliminar([FromBody] EquipoEntradaDelete entrada )
+    public string Eliminar([FromBody] EquipoUpdate entrada )
     {
-        return _service.EliminarEquipo(entrada.Codigoequipo, entrada.IdAdministrador);
+        return _service.EliminarEquipo(entrada.equipo.Id, entrada.IdAdministrador);
     }
 
     [HttpGet("VerEquipos")]
-    public IEnumerable<EquipoModel> VerEquipos()
+    public IEnumerable<Equipo> VerEquipos()
     {
         return _service.MostrarEquipos();
     }
@@ -47,30 +48,30 @@ public class EquipoController : ControllerBase
     [HttpPost("CambiarEstadoEquipo")]
     public string CambiarEstado([FromBody] cambiarEstadoEntrada entrada )
     {
-        return _service.cambiar_estado_equipo(entrada.Codigoelemento, entrada.IdAdministrador, entrada.Mantenimiento);
+        return _service.cambiar_estado_equipo(entrada.IdElement1, entrada.IdElement2, entrada.Mantenimiento);
     }
 
     [HttpGet("VerComponentesEquipo/{CodigoComponente}")]
-    public IEnumerable<ComponenteModel> VerComponentesEquipo(string CodigoComponente)
+    public IEnumerable<Componentesaccesorio> VerComponentesEquipo(int IdEquipo)
     {
-        return _service.VerComponentesAsociados(CodigoComponente);
+        return _service.VerComponentesAsociados(IdEquipo);
     }
 
     [HttpGet("VerComponentesDisponible")]
-    public IEnumerable<ComponenteModel> VerComponentesDisponible()
+    public IEnumerable<Componentesaccesorio> VerComponentesDisponible()
     {
         return _service.VerComponentesNoAsociados();
     }
 
     [HttpPost("AsociarComponente")]
-    public string Asociar([FromBody] Identificadores entrada )
+    public string Asociar([FromBody] Ids2 entrada )
     {
-        return _service.AsociarComponenteEquipo(entrada.Codigocomponente, entrada.Codigoequipo, entrada.IdAdministrador);
+        return _service.AsociarComponenteEquipo(entrada.IdElement1, entrada.IdElement2, entrada.IdElement3);
     }
 
     [HttpPost("QuitarComponente")]
-    public string Quitar([FromBody] Identificadores entrada )
+    public string Quitar([FromBody] Ids2 entrada )
     {
-        return _service.EliminarComponenteEquipo(entrada.Codigocomponente, entrada.Codigoequipo, entrada.IdAdministrador);
+        return _service.EliminarComponenteEquipo(entrada.IdElement1, entrada.IdElement2, entrada.IdElement3);
     }
 }

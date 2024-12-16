@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServicesApp.Models.Services;
 using ServicesApp.Models;
+using InventarioUCB_SPA.DataBaseApp.Models;
 
 namespace InventarioUCB_SPA.Controllers;
 
@@ -21,9 +22,9 @@ public class ComponenteController : ControllerBase
     }
 
     [HttpGet("VerDetalleComponente/{CodigoComponente}")]
-    public ComponenteModel VerDetalle(string CodigoComponente)
+    public Componentesaccesorio VerDetalle(int IdComponente)
     {
-        return _service.DetalleComponente(CodigoComponente);
+        return _service.DetalleComponente(IdComponente);
     }
 
     [HttpPost("ActualizarComponente")]
@@ -33,13 +34,13 @@ public class ComponenteController : ControllerBase
     }
 
     [HttpPost("EliminarComponente")]
-    public string Eliminar([FromBody] ComponenteDelete entrada )
+    public string Eliminar([FromBody] ComponenteUpdate entrada )
     {
-        return _service.EliminarComponente(entrada.CodigoComponente, entrada.IdAdministrador);
+        return _service.EliminarComponente(entrada.componente.Id, entrada.IdAdministrador);
     }
 
     [HttpGet("VerComponentes/{estado}")]
-    public IEnumerable<ComponenteModel> VerEquipos(string estado)
+    public IEnumerable<Componentesaccesorio> VerEquipos(string estado)
     {
         return _service.MostrarComponentes(estado);
     }
@@ -47,6 +48,6 @@ public class ComponenteController : ControllerBase
     [HttpPost("CambiarEstadoComponentes")]
     public string CambiarEstado([FromBody] cambiarEstadoEntrada entrada )
     {
-        return _service.cambiar_estado_componente(entrada.Codigoelemento, entrada.IdAdministrador, entrada.Mantenimiento);
+        return _service.cambiar_estado_componente(entrada.IdElement1, entrada.IdElement2);
     }
 }
