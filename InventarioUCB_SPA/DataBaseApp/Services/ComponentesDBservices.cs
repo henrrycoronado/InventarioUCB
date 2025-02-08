@@ -21,7 +21,7 @@ public class ComponenteRepository : BaseRepository<Componentesaccesorio>
             .Where(e => e.Estado == estado)
             .ToList();
     }
-    // Obtener equipo por código UCB
+    // Obtener equipo por código UCB    
     public Componentesaccesorio? GetByCodigoUcb(string codigoUcb)
     {
         return _context.Componentesaccesorios

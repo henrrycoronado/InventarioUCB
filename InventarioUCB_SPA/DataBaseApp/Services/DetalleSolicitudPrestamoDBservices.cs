@@ -44,6 +44,5 @@ public class DetalleSolicitudPrestamoRepository : BaseRepository<Detallessolicit
                 .Where( e => e.IdSolicitudPrestamo == Id_Solicitud && e.IdEquipo == Id_equipo && e.Estado == "Deseleccionado")
                 .FirstOrDefault();
     }
-
     
 }

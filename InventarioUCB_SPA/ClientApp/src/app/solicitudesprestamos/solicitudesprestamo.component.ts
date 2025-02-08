@@ -23,18 +23,17 @@ export class SolicitudesPrestamoComponent {
     FechaFinPrestamo: ''
   };
   equiposDisponibles: any[] = [];
-  equiposSeleccionados: number[] = []; // Almacena los IDs de los equipos seleccionados
+  equiposSeleccionados: number[] = [];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {}
 
   ngOnInit(): void {
     this.obtenerSolicitudes();
     this.obtenerEquiposDisponibles();
-    this.fechaSolicitud = new Date().toISOString().split('T')[0]; // Obtener la fecha actual (YYYY-MM-DD)
+    this.fechaSolicitud = new Date().toISOString().split('T')[0];
   }
 
   obtenerEquiposDisponibles(): void {
-    // Obtener los equipos disponibles para prestar
     this.http.get<any[]>(`${this.baseUrl}equipo/VerEquipos`).subscribe(
       (equipos) => {
         this.equiposDisponibles = equipos;
@@ -48,24 +47,19 @@ export class SolicitudesPrestamoComponent {
   obtenerSolicitudes(): void {
     this.cargandoSolicitudes = true;
 
-    // 1. Obtener la lista de solicitudes
     this.http.get<any[]>(`${this.baseUrl}solicitudprestamo/VerSolicitudes`).subscribe(
       (solicitudes) => {
         solicitudes.forEach((solicitud) => {
           console.log(solicitud)
-          // Inicializar una lista de equipos vacía para cada solicitud
           solicitud.equipos = [];
 
-          // 2. Obtener los detalles de la solicitud
           this.http.get<any[]>(`${this.baseUrl}solicitudprestamo/VerDetalleSolicitud/${solicitud.id}`).subscribe(
             (detalles) => {
               detalles.forEach((detalle) => {
                 console.log(detalle)
-                // 3. Obtener la información del equipo para cada detalle
                 this.http.get<any>(`${this.baseUrl}equipo/VerDetalleEquipo/${detalle.idEquipo}`).subscribe(
                   (equipo) => {
                     console.log(equipo)
-                    // Agregar el equipo a la solicitud actual
                     solicitud.equipos.push(equipo);
                   },
                   (error) => console.error('Error al obtener detalle del equipo:', error)
@@ -75,8 +69,6 @@ export class SolicitudesPrestamoComponent {
             (error) => console.error('Error al obtener detalles de la solicitud:', error)
           );
         });
-
-        // Asignar las solicitudes finales al arreglo
         this.solicitudes = solicitudes;
         this.cargandoSolicitudes = false;
       },
@@ -105,18 +97,20 @@ export class SolicitudesPrestamoComponent {
     }
 
     const request = {
-      IdElement1: this.solicitudSeleccionada.IdSolicitudPrestamo,
+      IdElement1: this.solicitudSeleccionada.id,
       IdElement2: 1
     };
-
-    this.http.post(this.baseUrl + 'solicitudprestamo/Aprobar', request).subscribe(
+    console.log(request);
+    this.http.post(this.baseUrl + 'gestionarsolicitudes/aprobar', request).subscribe(
       () => {
         alert('Solicitud aprobada correctamente.');
         this.obtenerSolicitudes();
         this.cerrarDetalle();
+
       },
       (error) => {
         console.error('Error al aprobar la solicitud:', error);
+        alert('Error en la aprobacion');
       }
     );
   }
@@ -128,11 +122,11 @@ export class SolicitudesPrestamoComponent {
     }
 
     const request = {
-      IdElement1: this.solicitudSeleccionada.IdSolicitudPrestamo,
+      IdElement1: this.solicitudSeleccionada.id,
       IdElement2: 1
     };
 
-    this.http.post(this.baseUrl + 'solicitudprestamo/Reprobar', request).subscribe(
+    this.http.post(this.baseUrl + 'gestionarsolicitudes/rechazar', request).subscribe(
       () => {
         alert('Solicitud rechazada correctamente.');
         this.obtenerSolicitudes();
@@ -140,6 +134,7 @@ export class SolicitudesPrestamoComponent {
       },
       (error) => {
         console.error('Error al rechazar la solicitud:', error);
+        alert('Error al rechazar la solicitud');
       }
     );
   }

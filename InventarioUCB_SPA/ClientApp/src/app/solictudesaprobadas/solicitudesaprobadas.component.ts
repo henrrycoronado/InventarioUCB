@@ -48,24 +48,19 @@ export class SolicitudesAprobadasComponent {
   obtenerSolicitudes(): void {
     this.cargandoSolicitudes = true;
 
-    // 1. Obtener la lista de solicitudes
     this.http.get<any[]>(`${this.baseUrl}solicitudprestamo/VerSolicitudesAceptadas`).subscribe(
       (solicitudes) => {
         solicitudes.forEach((solicitud) => {
           console.log(solicitud)
-          // Inicializar una lista de equipos vacía para cada solicitud
           solicitud.equipos = [];
 
-          // 2. Obtener los detalles de la solicitud
           this.http.get<any[]>(`${this.baseUrl}solicitudprestamo/VerDetalleSolicitud/${solicitud.id}`).subscribe(
             (detalles) => {
               detalles.forEach((detalle) => {
                 console.log(detalle)
-                // 3. Obtener la información del equipo para cada detalle
                 this.http.get<any>(`${this.baseUrl}equipo/VerDetalleEquipo/${detalle.idEquipo}`).subscribe(
                   (equipo) => {
                     console.log(equipo)
-                    // Agregar el equipo a la solicitud actual
                     solicitud.equipos.push(equipo);
                   },
                   (error) => console.error('Error al obtener detalle del equipo:', error)
@@ -105,10 +100,10 @@ export class SolicitudesAprobadasComponent {
     }
 
     const request = {
-      IdElement1: this.solicitudSeleccionada.IdSolicitudPrestamo,
+      IdElement1: this.solicitudSeleccionada.id,
       IdElement2: 1
     };
-
+    console.log(request);
     this.http.post(this.baseUrl + 'gestionaraprobaciones/aprobar', request).subscribe(
       () => {
         alert('Solicitud aprobada correctamente.');
@@ -130,7 +125,7 @@ export class SolicitudesAprobadasComponent {
     }
 
     const request = {
-      IdElement1: this.solicitudSeleccionada.IdSolicitudPrestamo,
+      IdElement1: this.solicitudSeleccionada.id,
       IdElement2: 1
     };
 
@@ -148,19 +143,17 @@ export class SolicitudesAprobadasComponent {
   }
 
   registrarSolicitud(): void {
-    // Paso 1: Registrar la solicitud de préstamo
     const nuevaSolicitud = {
-      IdUsuario: 1, // Usuario siempre es 1
-      FechaSolicitud: this.fechaSolicitud, // Usamos la fecha actual
+      IdUsuario: 1,
+      FechaSolicitud: this.fechaSolicitud, 
       FechaInicioPrestamo: this.solicitud.FechaInicioPrestamo,
       FechaFinPrestamo: this.solicitud.FechaFinPrestamo,
-      Estado: 'Pendiente' // Estado siempre es "Pendiente"
+      Estado: 'Pendiente'
     };
 
     this.http.post<boolean>(`${this.baseUrl}solicitudprestamo/EnviarSolicitud`, nuevaSolicitud).subscribe(
       (exito) => {
         if (exito) {
-          // Si la solicitud se registra correctamente, se recibe el ID de la solicitud
           this.agregarDetallesEquipos();
         } else {
           console.error('Error al registrar la solicitud');
@@ -173,8 +166,7 @@ export class SolicitudesAprobadasComponent {
   }
 
   agregarDetallesEquipos(): void {
-    // Paso 2: Agregar los detalles para cada equipo seleccionado
-    const idSolicitud = 1; // El ID de la solicitud debe ser retornado por el backend
+    const idSolicitud = 1; 
     this.equiposSeleccionados.forEach((idEquipo) => {
       const request = { IdElement1: idSolicitud, IdElement2: idEquipo };
       

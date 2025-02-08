@@ -21,7 +21,7 @@ public class GestionarAprobacionesService : IGestionarAprobacionesService
             Console.WriteLine( "Solicitud Aprobada");
             return true;
         };
-        ;
+    
         Console.WriteLine("Solicitud no modificada, error en la DB");
         return false;
     }

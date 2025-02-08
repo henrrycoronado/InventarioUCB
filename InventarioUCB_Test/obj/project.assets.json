@@ -6219,40 +6219,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HenrryCoronado\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\dikyd\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
+      "projectUniqueName": "C:\\Users\\dikyd\\Documents\\GitHub\\New folder\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
       "projectName": "InventarioUCB_Test",
-      "projectPath": "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
-      "packagesPath": "C:\\Users\\HenrryCoronado\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_Test\\obj\\",
+      "projectPath": "C:\\Users\\dikyd\\Documents\\GitHub\\New folder\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
+      "packagesPath": "C:\\Users\\dikyd\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dikyd\\Documents\\GitHub\\New folder\\InventarioUCB\\InventarioUCB_Test\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\HenrryCoronado\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\dikyd\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_SPA\\InventarioUCB_SPA.csproj": {
-              "projectPath": "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_SPA\\InventarioUCB_SPA.csproj"
+            "C:\\Users\\dikyd\\Documents\\GitHub\\New folder\\InventarioUCB\\InventarioUCB_SPA\\InventarioUCB_SPA.csproj": {
+              "projectPath": "C:\\Users\\dikyd\\Documents\\GitHub\\New folder\\InventarioUCB\\InventarioUCB_SPA\\InventarioUCB_SPA.csproj"
             }
           }
         }
@@ -6305,7 +6297,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
