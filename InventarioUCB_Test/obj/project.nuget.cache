@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u7JjzFsXKOw=",
+  "dgSpecHash": "h9kTT8AKqNo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
+  "projectFilePath": "C:\\Users\\HenrryCoronado\\Documents\\UCB\\Semestre_IV\\Diseño_Software\\Proyect\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HenrryCoronado\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\HenrryCoronado\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\7.0.20\\microsoft.aspnetcore.spaproxy.7.0.20.nupkg.sha512",

@@ -27,7 +27,7 @@ public class RegisterService : IRegisterService
             Nombre = user.Nombre,
             Apellido = user.Apellido,
             Correo = user.Correo,
-            Contraseña = user.Contraseña,
+            Contraseña = user.Contrasena,
             Telefono = user.Telefono,
             Rol = user.Rol
         };

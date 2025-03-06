@@ -10,7 +10,7 @@ public class UsuarioModel
 
     public string Correo { get; set; } = null!;
 
-    public string Contraseña { get; set; } = null!;
+    public string Contrasena { get; set; } = null!;
 
     public string Telefono { get; set; } = null!;
 
@@ -27,4 +27,9 @@ public class LoginRequest
 {
     public string Correo { get; set; } = null!;
     public string Password { get; set; } = null!;
+}
+
+public class enteroletra{
+    public int id { get; set;}
+    public string estado { get; set; } = null!;
 }

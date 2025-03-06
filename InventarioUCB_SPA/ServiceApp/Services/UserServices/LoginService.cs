@@ -21,4 +21,11 @@ public class LoginServices : ILoginService
         }
         return null;
     }
+    public string? GetRol(int id){
+        var result = _user.GetById(id);
+        if(result != null && result.Rol != null){
+            return result.Rol;
+        }
+        return null;
+    }
 }

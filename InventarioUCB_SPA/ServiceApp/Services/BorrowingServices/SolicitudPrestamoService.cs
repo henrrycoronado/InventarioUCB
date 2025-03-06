@@ -31,9 +31,9 @@ public class SolicitudPrestamoService : ISolicitudPrestamoService
         return false;
     }
     
-    public List<Solicitudesprestamo> mostrarSolicitudesPrestamo()
+    public List<Solicitudesprestamo> mostrarSolicitudesPrestamo(string TipoSolicitudes)
     {
-        var result = _solicitud.GetPendingRequests();
+        var result = _solicitud.GetSolicitudEstado(TipoSolicitudes);
         return result;
     }
     public List<Detallessolicitudprestamo> DetalleSolicitudPrestamo(int IdSolicitud)
@@ -103,5 +103,10 @@ public class SolicitudPrestamoService : ISolicitudPrestamoService
             }
             return "detalle no Eliminada, error en la DB";
         }
+    }
+    public void Actualizar(int id, string estado){ 
+        var soli = _solicitud.GetById(id);
+        soli.Estado = estado; 
+        _solicitud.Update(soli, id);
     }
 }

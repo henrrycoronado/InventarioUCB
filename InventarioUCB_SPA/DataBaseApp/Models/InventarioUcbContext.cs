@@ -364,7 +364,7 @@ public partial class InventarioUcbContext : DbContext
                 .HasColumnName("ID");
             entity.Property(e => e.Estado)
                 .HasDefaultValueSql("'Pendiente'")
-                .HasColumnType("enum('Pendiente','Aprobada','Rechazada')")
+                .HasColumnType("enum('Pendiente','Aprobada_Fase1','Aprobada_Fase2','Rechazada')")
                 .HasColumnName("ESTADO");
             entity.Property(e => e.FechaFinPrestamo).HasColumnName("FECHA_FIN_PRESTAMO");
             entity.Property(e => e.FechaInicioPrestamo).HasColumnName("FECHA_INICIO_PRESTAMO");

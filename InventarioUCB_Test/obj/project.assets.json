@@ -6225,11 +6225,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
+      "projectUniqueName": "C:\\Users\\HenrryCoronado\\Documents\\UCB\\Semestre_IV\\Diseño_Software\\Proyect\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
       "projectName": "InventarioUCB_Test",
-      "projectPath": "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
+      "projectPath": "C:\\Users\\HenrryCoronado\\Documents\\UCB\\Semestre_IV\\Diseño_Software\\Proyect\\InventarioUCB\\InventarioUCB_Test\\InventarioUCB_Test.csproj",
       "packagesPath": "C:\\Users\\HenrryCoronado\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_Test\\obj\\",
+      "outputPath": "C:\\Users\\HenrryCoronado\\Documents\\UCB\\Semestre_IV\\Diseño_Software\\Proyect\\InventarioUCB\\InventarioUCB_Test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6251,8 +6251,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_SPA\\InventarioUCB_SPA.csproj": {
-              "projectPath": "C:\\Users\\HenrryCoronado\\Desktop\\InventarioUCB\\InventarioUCB_SPA\\InventarioUCB_SPA.csproj"
+            "C:\\Users\\HenrryCoronado\\Documents\\UCB\\Semestre_IV\\Diseño_Software\\Proyect\\InventarioUCB\\InventarioUCB_SPA\\InventarioUCB_SPA.csproj": {
+              "projectPath": "C:\\Users\\HenrryCoronado\\Documents\\UCB\\Semestre_IV\\Diseño_Software\\Proyect\\InventarioUCB\\InventarioUCB_SPA\\InventarioUCB_SPA.csproj"
             }
           }
         }

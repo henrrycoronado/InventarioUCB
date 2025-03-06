@@ -34,6 +34,8 @@ builder.Services.AddScoped<IPrestamoService, PrestamoService>();
 builder.Services.AddScoped<ISolicitudPrestamoService, SolicitudPrestamoService>();
 builder.Services.AddScoped<ICategoriaServices, CategoriaServices>();
 
+builder.Services.AddSingleton<LoginData>();
+
 builder.Services.AddControllersWithViews();
 
 

@@ -10,9 +10,11 @@ namespace InventarioUCB_SPA.Controllers;
 public class SolicitudPrestamoController : ControllerBase
 {
     private readonly ISolicitudPrestamoService _service;
-    public SolicitudPrestamoController(ISolicitudPrestamoService service)
+    private readonly LoginData _login;
+    public SolicitudPrestamoController(ISolicitudPrestamoService service, LoginData login)
     {
         _service = service;
+        _login = login;
     }
 
     [HttpPost("EnviarSolicitud")]
@@ -32,10 +34,10 @@ public class SolicitudPrestamoController : ControllerBase
         return _service.RemoveDetalle(request.IdElement1, request.IdElement2);
     }
 
-    [HttpGet("VerSolicitudes")]
-    public IEnumerable<Solicitudesprestamo> Mostrar()
+    [HttpGet("VerSolicitudes/{TipoSolicitudes}")]
+    public IEnumerable<Solicitudesprestamo> Mostrar(string TipoSolicitudes)
     {
-        return _service.mostrarSolicitudesPrestamo();
+        return _service.mostrarSolicitudesPrestamo(TipoSolicitudes);
     }
 
     [HttpGet("VerDetalleSolicitud/{idSoli}")]
@@ -54,6 +56,13 @@ public class SolicitudPrestamoController : ControllerBase
     public IEnumerable<Solicitudesprestamo> HistorialSoli(int idUser)
     {
         return _service.HistorialSolicitudPrestamo(idUser);
+    }
+
+    [HttpPost("actualizarsolicitud")]
+    public void actualizar([FromBody] enteroletra request)
+    {
+        _service.Actualizar(request.id, request.estado);
+        return;
     }
     
 }
