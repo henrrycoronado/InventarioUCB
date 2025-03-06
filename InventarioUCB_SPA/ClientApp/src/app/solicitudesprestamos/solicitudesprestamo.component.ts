@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./solicitudesprestamo.component.css']
 })
 export class SolicitudesPrestamoComponent {
-
+  Id: number = 4;
+  TipoSolicitudes: string = 'Pendiente';
   solicitudes: any[] = [];
   cargandoSolicitudes = false;
   solicitudSeleccionada: any = null; // Solicitud actualmente seleccionada
@@ -45,11 +46,35 @@ export class SolicitudesPrestamoComponent {
     );
   }
 
+
+  obtenerUsuarioRol(): void {
+    this.http.get(`${this.baseUrl}usuario/VerRol/${this.Id}`, { responseType: 'text' }).subscribe(
+      (rol) => {
+        if (rol == null) {
+          this.TipoSolicitudes = 'vacio';
+        } else {
+          if (rol === 'Administrativo') {
+            this.TipoSolicitudes = 'Pendiente';
+          } else if (rol === 'Root') {
+            this.TipoSolicitudes = 'Aprobado_Fase1';
+          } else {
+            this.TipoSolicitudes = 'Aprobado_Fase2';
+          }
+        }
+      },
+      (error) => {
+        console.error('Error al obtener el rol del usuario:', error);
+      }
+    );
+    console.log(this.TipoSolicitudes);
+  }
+  
+
   obtenerSolicitudes(): void {
     this.cargandoSolicitudes = true;
 
     // 1. Obtener la lista de solicitudes
-    this.http.get<any[]>(`${this.baseUrl}solicitudprestamo/VerSolicitudes`).subscribe(
+    this.http.get<any[]>(`${this.baseUrl}solicitudprestamo/VerSolicitudes/${this.TipoSolicitudes}`).subscribe(
       (solicitudes) => {
         solicitudes.forEach((solicitud) => {
           console.log(solicitud)
@@ -103,14 +128,22 @@ export class SolicitudesPrestamoComponent {
       alert('Por favor, proporciona una justificación.');
       return;
     }
-
+    let estadoSiguiente: string = '';
+    if(this.TipoSolicitudes == 'vacio' || this.TipoSolicitudes == 'Aprobada_Fase2'){
+      return;
+    }
+    if(this.TipoSolicitudes == 'Pendiente'){
+      estadoSiguiente = 'Aprobada_Fase1';
+    }
+    else if(this.TipoSolicitudes == 'Aprobada_Fase1'){
+      estadoSiguiente = 'Aprobada_Fase2';
+    }
     const payload = {
       idSolicitud: this.solicitudSeleccionada.IdSolicitudPrestamo,
-      estado: 'Aprobada',
-      justificacion: this.justificacion
+      idAdministrador: this.Id
     };
 
-    this.http.post(this.baseUrl + 'prestamo/actualizarsolicitud', payload).subscribe(
+    this.http.post(this.baseUrl + 'gestionarsolicitudes/AprobarSoicitud', payload).subscribe(
       () => {
         alert('Solicitud aprobada correctamente.');
         this.obtenerSolicitudes();

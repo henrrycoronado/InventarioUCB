@@ -15,8 +15,12 @@ public class GestionarSolicitudService : IGestionarSolicitudService
         if(solicitud == null){
             return "Solicitud no encontrada";
         }
-        solicitud.Estado = "Aprobada";
-        if(_solicitud.Update(solicitud, solicitud.Id) && _prestamoService.CrearPrestamo(solicitud)){
+        if(solicitud.Estado == "Pendiente"){
+            solicitud.Estado = "Aprobado_Fase1";
+        }else if(solicitud.Estado == "Aprobado_Fase1"){
+            solicitud.Estado = "Aprobado_Fase2";
+        }
+        if(_solicitud.Update(solicitud, solicitud.Id)){
             return "Solicitud Aprobada";
         };
         ;

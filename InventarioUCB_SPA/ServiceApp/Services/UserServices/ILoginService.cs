@@ -5,4 +5,5 @@ public interface ILoginService
 {
     bool ComprobarCorreo(string correo);
     int? Logear(string correo, string password);
+    string? GetRol(int id);
 }
